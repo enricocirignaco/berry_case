@@ -174,7 +174,7 @@ GenerateClassCluster=0
 DocumentUniqueId=GIZDNNHC
 
 [Document9]
-DocumentPath=Sheet1.SchDoc
+DocumentPath=main.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
