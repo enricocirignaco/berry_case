@@ -224,6 +224,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=PMRQZDNJ
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for berry_case_altium\Design Rule Check - pcb_top.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
