@@ -106,23 +106,6 @@ GenerateClassCluster=0
 DocumentUniqueId=GXSANAFG
 
 [Document5]
-DocumentPath=Adafruit PowerBoost 1000C Rev B.PcbDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=OJDFRAUV
-
-[Document6]
 DocumentPath=pcb_top.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -139,7 +122,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VOSXHFIW
 
-[Document7]
+[Document6]
 DocumentPath=power_supply.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -156,7 +139,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=XMRTXZOQ
 
-[Document8]
+[Document7]
 DocumentPath=MCU.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -173,7 +156,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=GIZDNNHC
 
-[Document9]
+[Document8]
 DocumentPath=main.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -190,7 +173,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=RMJBGBXO
 
-[Document10]
+[Document9]
 DocumentPath=raspberry_interface.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -207,7 +190,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=KNRMKQGR
 
-[Document11]
+[Document10]
 DocumentPath=power_supply_v2.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
