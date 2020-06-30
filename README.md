@@ -54,14 +54,14 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
-Develoop and Build an affordable and open source case for the Raspberry Pi 4 to help the users to become more productive then ever.
+# About The Project
+Develop and Build an affordable and open source case for the Raspberry Pi 4 to help the users to become more productive then ever.
 <img src="./ressources/images/top.png" alt="top_view">
 
 ### Starting Situation
 
-Surfing on the net I discovered some very cool case solutions for the RPi4. I almost ordered one of those products (Argon One). But then I realized that when the RPi4 was powered by a Power Bank(almost always in my case)(5V@2.1A) the CPU had some serious throttling problems. So overclocking with this power supply was out of discussion. I searched for alternative battery powered power supply(5.2V@3A). Without success.
-At the same time I discovered some interesting Half-solutions:
+Surfing on the net I discovered some very cool case solutions for the RPi4. I almost ordered one of those products (Argon One). But then I realized that when the RPi4 was powered by a Power Bank(almost always in my case)(5V@2.1A) the CPU had some serious throttling problems. So overclocking with this power supply was out of discussion. I searched for an alternative battery powered power supply(5.2V@3A). Without success.
+At the same time I discovered some interesting "Half-solutions":
 * [Argon One](https://www.argon40.com/argon-one-raspberry-pi-4-case.html) (very nice design, power button, cooling system)
 * [Acrylic Raspberry Pi set-top box kit](https://wiki.52pi.com/index.php/Acrylic_Raspberry_Pi_set-top_box_kit_SKU:_ZP-0098) (all IOs on the back, full dual HDMI)
 * [Raspberry Pi RGB Cooling HAT](https://www.yahboom.net/study/RGB_Cooling_HAT) (OLED dipslay with IP address, CPU temp, etc)
@@ -83,57 +83,58 @@ Find someone on github to collaborate with (I'm new on the platform).
 * Accessible GPIOs
 
 ### Current Status
+At the moment PCB V0.1 is beeing manufactured. I'm waiting for the board to start testing. In the version 0.1 only the upper board is beeing developed. The bottom PCB(only function is to take HDMI and Audio ports to the back) will be developed with Version 0.2 or 1.0 because it only need minor testing.
+At the moment no Firmware or Software is in development.
 
-## Getting Started
+# Getting Started
 ### Toolchain
 
-* [Altium Designer 20](https://altium.com)
+* [Altium Designer](https://altium.com)
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html)
 * [Autodesk Fuson 360](https://www.autodesk.com/products/fusion-360/overview)
 
 ### Hardware
+* [Schematics](docs/pcb_schematics.PDF)
+* [Assembly documentation](docs/pcb_assembly.PDF)
+
+During hardware development two major solution where taken into considaration.
+Both solutions where integrated on V0.1 in order to test both. To separate the circuits 0ohm resistors where used.
+##### Always ON MCU powered by on board 3V3 Buck Boost Regolator
+In this solution the MCU and the 3V3 regulator can't be turned OFF (sleep mode available). MCU wait for an interrupt triggered by a push button. Then it enables 5V2 Regulator and therefore power up the Raspberry. 
+* **Downsides**
+  * 3V3 Regulator and MCU still draw current when device is turned OFF.
+  * Expensive(3V3 Regulator)
+
+* **Upsides**
+  * Simpler circuit
+  * More reliable system
+
+<img src="./ressources/diagrams/diagram_v0.1a.svg" alt="diagram">
+
+##### MCU powered by Raspberry on board 3V3 regulator
+In this solution no 3V3 Regulator is needed and MCU can be turned OFF. MCU is powered by the Raspberry on board 3V3 Regulator.
+By pressing a push button a capacitor is charged and the 5V2 Regulator is activated. The Raspberry and therefore the MCU are powered up. As soon as the MCU is started the 5V2 Regulator is kept enabled until the system is turned OFF. The capacitor is needed to bypass the time needed by the MCU to power up.
+* **Downsides**
+  * Circuit need to be tested (proof of concept)
+
+* **Upsides**
+  * MCU completely turned off when device is turned off.
+  * Cheaper(no 3V3 Regulator needed)
+
+<img src="./ressources/diagrams/diagram_v0.1b.svg" alt="diagram">
 
 ### Firmware
-
 ### Software (Linux)
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
-
-### Installation
- 
-1. Clone the berry_case
-```sh
-git clone https://github.com/enricocirignaco/berry_case.git
-```
-2. Install NPM packages
-```sh
-npm install
-```
-
+#### Prerequisites
+#### Installation
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
 I'm looking for someone that want to collaborate in this project. I would like to get in touch with you if you are interested. :)
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -141,16 +142,8 @@ I'm looking for someone that want to collaborate in this project. I would like t
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
-<!-- CONTACT -->
 ## Contact
 
 Enrico Cirignaco - e.cirignaco@gmail.com
