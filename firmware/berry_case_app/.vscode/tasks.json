@@ -10,11 +10,15 @@
 				"isDefault": true
 			},
 			"type": "shell",
-			"command": "c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/BuildTools/bin/make.exe",
+			"command": "C:/ProgramData/DockerDesktop/version-bin/docker.exe",
 			"args":
 			[
-				"GCC_PATH=c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/ArmGcc/bin",
-				"-j6"
+				"run",
+				"-ti",
+				"--rm",
+				"--volume",
+				"${PWD}:/project",
+				"berrycaseapp:make"
 			],
 			"problemMatcher":
 			{
@@ -47,7 +51,6 @@
 				"-IDrivers/STM32F0xx_HAL_Driver/Inc", 
 				"-IDrivers/STM32F0xx_HAL_Driver/Inc/Legacy", 
 				"-IDrivers/CMSIS/Device/ST/STM32F0xx/Include", 
-				"-IDrivers/CMSIS/Include", 
 				"-IDrivers/CMSIS/Include",
 
 				"-mcpu=cortex-m0",
