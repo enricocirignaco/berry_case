@@ -1,0 +1,22 @@
+{
+	"version": "0.2.0",
+	"configurations":
+	[
+		{
+			"name": "Cortex debug",
+			"type": "cortex-debug",
+			"request": "launch",
+			"servertype": "openocd",
+			"cwd": "${workspaceFolder}",
+			"armToolchainPath": "c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/ArmGcc/bin",
+			"executable": "build/berry_case_app.elf",
+			"svdFile": "c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/SvdTools/STM32F0/STM32F0x0.svd",
+			"configFiles":
+			[
+				"c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/OpenOCD/scripts/interface/stlink.cfg",
+				"c:/Users/local-tech/.vscode/extensions/buzzyelectronics.stm-helper-1.2.9/OpenOCD/scripts/target/stm32f0x.cfg"
+			],
+			"preLaunchTask": "Build project"
+		}
+	]
+}
