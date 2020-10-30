@@ -1,7 +1,5 @@
 
 /.mxproject
 build
-.vscode
 *.backup
-*.code-workspace
 __pycache__
