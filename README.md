@@ -125,6 +125,8 @@ By pressing a push button a capacitor is charged and the 5V2 Regulator is activa
 <img src="./ressources/diagrams/diagram_v0.1b.svg" alt="diagram">
 
 ### Firmware
+#### OLED Display
+https://www.mcielectronics.cl/website_MCI/static/documents/0.91inch_OLED_Module_User_Manual_EN.pdf
 ### Software (Linux)
 #### Prerequisites
 #### Installation
