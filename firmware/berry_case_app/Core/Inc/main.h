@@ -58,6 +58,16 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define battery_voltage_in_Pin GPIO_PIN_0
+#define battery_voltage_in_GPIO_Port GPIOA
+#define pwm_fan_out_Pin GPIO_PIN_4
+#define pwm_fan_out_GPIO_Port GPIOA
+#define reset_btn_in_Pin GPIO_PIN_6
+#define reset_btn_in_GPIO_Port GPIOA
+#define navigation_btn_in_Pin GPIO_PIN_7
+#define navigation_btn_in_GPIO_Port GPIOA
+#define enter_btn_in_Pin GPIO_PIN_0
+#define enter_btn_in_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

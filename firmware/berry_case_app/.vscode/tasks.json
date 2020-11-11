@@ -9,15 +9,15 @@
             },
             "type": "shell",
 	    "command": "docker",
-	    "args":
-	    [
-	  	    "run",
-	  	    "-ti",
-	  	    "--rm",
-		    "--volume",
-		    "${workspaceFolder}:/project",
-		    "enricocirignaco/stm32_build:latest",
-		    "make"
+	    "args": [
+            "run",
+            "-ti",
+            "--rm",
+            "--volume",
+            "${workspaceFolder}:/project",
+		    "enricocirignaco/stm32_build:develop",
+            "/usr/bin/make",
+            "-j12"
             ],
             "problemMatcher": {
                 "pattern": {
@@ -36,8 +36,15 @@
         {
             "label": "Compile current file",
             "type": "shell",
-            "command": "/usr/bin/arm-none-eabi-gcc",
+            "command": "docker",
             "args": [
+                "run",
+                "-ti",
+                "--rm",
+                "--volume",
+                "${workspaceFolder}:/project",
+                "enricocirignaco/stm32_build:develop",
+                "/usr/bin/arm-none-eabi-gcc",
                 "-c",
                 "-DUSE_HAL_DRIVER",
                 "-DSTM32F030x6",
@@ -87,8 +94,15 @@
         {
             "label": "Delete build folder",
             "type": "shell",
-            "command": "/usr/bin/make",
+            "command": "docker",
             "args": [
+                "run",
+                "-ti",
+                "--rm",
+                "--volume",
+                "${workspaceFolder}:/project",
+                "enricocirignaco/stm32_build:develop",
+                "/usr/bin/make",
                 "clean"
             ],
             "problemMatcher": [],
@@ -106,7 +120,7 @@
                 "-f",
                 ".vscode/dummy.cfg",
                 "-c",
-                "program build/berry_case_app.elf verify reset exit"
+                "program build/test_prj.elf verify reset exit"
             ],
             "problemMatcher": [],
             "dependsOn": "Build project"
@@ -121,7 +135,7 @@
                 "-f",
                 ".vscode/dummy.cfg",
                 "-c",
-                "program build/berry_case_app.elf verify reset exit"
+                "program build/test_prj.elf verify reset exit"
             ],
             "problemMatcher": []
         },
@@ -173,8 +187,15 @@
         {
             "label": "Run Python file",
             "type": "shell",
-            "command": "python3",
+            "command": "docker",
             "args": [
+                "run",
+                "-ti",
+                "--rm",
+                "--volume",
+                "${workspaceFolder}:/project",
+                "enricocirignaco/stm32_build:develop",
+                "/usr/bin/python3",
                 "${file}"
             ],
             "presentation": {
@@ -185,9 +206,11 @@
         {
             "label": "Open CubeMX project",
             "type": "shell",
-            "command": "xdg-open",
+            "command": "open",
             "args": [
-                "berry_case_app.ioc"
+                "${workspaceFolderBasename}.ioc",
+                "-a",
+                "/Applications/STMicroelectronics/STM32CubeMX.app"
             ],
             "presentation": {
                 "focus": false
@@ -197,9 +220,8 @@
         {
             "label": "Update workspace",
             "type": "shell",
-            "command": "python3",
+            "command": "./project_update.sh",
             "args": [
-                "${workspaceFolder}/ideScripts/update.py"
             ],
             "presentation": {
                 "focus": true
