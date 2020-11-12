@@ -1,7 +1,6 @@
 /.mxproject
 build
 ideScripts
-.vscode
 *.backup
 *.code-workspace
 __pycache__
