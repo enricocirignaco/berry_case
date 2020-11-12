@@ -3,13 +3,15 @@
         "____________________USER_FIELDS_CAN_BE_MODIFIED____________________": "",
         "user_cSources": [
             "app/app.c",
-            "app/fsm/fsm.c"
+            "app/fsm/fsm.c",
+            "app/gpio/_gpio.c"
         ],
         "user_asmSources": [],
         "user_ldSources": [],
         "user_cIncludes": [
             "app",
-            "app/fsm"
+            "app/fsm",
+            "app/gpio"
         ],
         "user_asmIncludes": [],
         "user_ldIncludes": [],

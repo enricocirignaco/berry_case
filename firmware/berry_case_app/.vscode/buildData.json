@@ -3,10 +3,11 @@
     "ABOUT2": "User should not edit this fields, instead it should edit 'c_cpp_properties.json'",
     "ABOUT3": "This file is regenerated on 'Update workspace' task.",
     "VERSION": "1.7",
-    "LAST_RUN": "2020-11-11 10:09:31.831261",
+    "LAST_RUN": "2020-11-12 19:29:56.173855",
     "cSources": [
         "app/app.c",
         "app/fsm/fsm.c",
+        "app/gpio/_gpio.c",
         "Core/Src/main.c",
         "Core/Src/gpio.c",
         "Core/Src/adc.c",
@@ -46,6 +47,7 @@
     "cIncludes": [
         "app",
         "app/fsm",
+        "app/gpio",
         "Core/Inc",
         "Drivers/STM32F0xx_HAL_Driver/Inc",
         "Drivers/STM32F0xx_HAL_Driver/Inc/Legacy",
@@ -67,6 +69,7 @@
         "-DSTM32F030x6",
         "-Iapp",
         "-Iapp/fsm",
+        "-Iapp/gpio",
         "-ICore/Inc",
         "-IDrivers/STM32F0xx_HAL_Driver/Inc",
         "-IDrivers/STM32F0xx_HAL_Driver/Inc/Legacy",
