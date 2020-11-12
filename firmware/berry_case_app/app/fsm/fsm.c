@@ -6,13 +6,12 @@
  * @version     0.0.1
  *
  *
- * @addtogroup  {Driver|BSP|Middleware|Library|Module|Application}
+ * @addtogroup  Middleware
  * group description
  * @{
  */
- 
+
 /* Includes ------------------------------------------------------------------*/
-#include "app.h"
 #include "fsm.h"
 /* private typedef -----------------------------------------------------------*/
 
@@ -23,12 +22,66 @@
 /* private variables ---------------------------------------------------------*/
 
 /* private function prototypes -----------------------------------------------*/
-
-/* private functions ---------------------------------------------------------*/
+void mod_fsm_state_display_battery(void);
+void mod_fsm_state_display_ip_addr(void);
+void mod_fsm_state_display_cpu_temp(void);
+void mod_fsm_state_display_fan_speed(void);
+void mod_fsm_state_idle(void);
+void mod_fsm_state_shutdown(void);
 
 /* public functions ----------------------------------------------------------*/
-    
+
+/* public variables ----------------------------------------------------------*/
+//Pointer FSM function
+mod_fsm_function_ptr_t sh_mod_fsm_function_ptr[0x06] =
+{
+	mod_fsm_state_display_battery,
+	mod_fsm_state_display_ip_addr,
+	mod_fsm_state_display_cpu_temp,
+	mod_fsm_state_display_fan_speed,
+	mod_fsm_state_idle,
+	mod_fsm_state_shutdown
+};
+// current state FSM
+mod_fsm_state_t mod_fsm_state;
+
+/* private functions ---------------------------------------------------------*/
+/* start FSM -----------------------------------------------------------------*/
+/*
+ * state display battery
+ */
+void mod_fsm_display_battery(void)
+{
+		mod_fsm_state = DISPLAY_IP_ADDR;
 }
+
+void mod_fsm_state_display_battery(void)
+{
+
+}
+void mod_fsm_state_display_ip_addr(void)
+{
+
+}
+void mod_fsm_state_display_cpu_temp(void)
+{
+
+}
+void mod_fsm_state_display_fan_speed(void)
+{
+
+}
+void mod_fsm_state_idle(void)
+{
+
+}
+void mod_fsm_state_shutdown(void)
+{
+	
+}
+/* public functions ----------------------------------------------------------*/
+    
+
 /**
  * @}
  */

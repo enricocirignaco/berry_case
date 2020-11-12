@@ -1,3 +1,4 @@
+
 /**
  * @file        app.h
  * @brief       description
@@ -5,17 +6,20 @@
  * @date        2020-11-04
  * @version     0.0.1
  *
- * @addtogroup  {Driver|BSP|Middleware|Library|Module|Application}
+ * @addtogroup  Middleware
  * @{
  */
-#ifndef $headerGuard$
-#define $headerGuard$
+#ifndef APP_H
+#define APP_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif
 
-/* includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------*/
+/* standard libraries */
+#include <stdint.h>
+#include <stdbool.h>
 
 /* exported typedef ----------------------------------------------------------*/
 
@@ -26,14 +30,14 @@
 /* exported variables --------------------------------------------------------*/
 
 /* exported function prototypes ----------------------------------------------*/
-void app_setup(void);
+void app_init(void);
 void app_loop(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* $headerGuard$ */
+#endif /* APP_H*/
 
 /**
  * @}

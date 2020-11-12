@@ -97,7 +97,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
-  app_setup();
+  app_init();
 
   /* USER CODE END 2 */
 

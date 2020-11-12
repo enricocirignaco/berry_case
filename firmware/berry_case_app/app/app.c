@@ -6,14 +6,15 @@
  * @version     0.0.1
  *
  *
- * @addtogroup  {Driver|BSP|Middleware|Library|Module|Application}
+ * @addtogroup  Middleware
  * group description
  * @{
  */
- 
+
 /* Includes ------------------------------------------------------------------*/
 #include "app.h"
-#include "main.h"
+#include "fsm.h"
+//#include "main.h"
 /* private typedef -----------------------------------------------------------*/
 
 /* private define ------------------------------------------------------------*/
@@ -23,22 +24,41 @@
 /* private variables ---------------------------------------------------------*/
 uint8_t dma_buffer[2000];
 uint8_t dma_buffer_size;
-UART_HandleTypeDef huart1;
-DMA_HandleTypeDef hdma_usart1_rx;
+//UART_HandleTypeDef huart1;
+//DMA_HandleTypeDef hdma_usart1_rx;
 /* private function prototypes -----------------------------------------------*/
 
 /* private functions ---------------------------------------------------------*/
 
+/* public variables ----------------------------------------------------------*/
+
 /* public functions ----------------------------------------------------------*/
-void app_setup(void)
+/*
+ * Application setup
+ * To run just one time in main
+ */
+void app_init(void)
 {
-    //HAL_UART_Receive_IT(&huart1,)
-    HAL_UART_Receive_DMA(&huart1, dma_buffer, dma_buffer_size);
+	//init modules here
+
+	// Set initial mode.
+
+	// delay while raspberry is starting
+
+	// set beginning state
+	mod_fsm_state = DISPLAY_BATTERY;
+	
 }
+
+/*
+ * Application Routine
+ * To run in the endless loop
+ */
 void app_loop(void)
 {
-    
+	//run FSM
+	sh_mod_fsm_function_ptr[mod_fsm_state]();
 }
-/**
+ /**
  * @}
  */
