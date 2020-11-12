@@ -27,7 +27,6 @@
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
-#include "app.h"
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -96,6 +95,7 @@ int main(void)
   MX_ADC_Init();
   MX_I2C1_Init();
   MX_TIM14_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
   app_init();
 

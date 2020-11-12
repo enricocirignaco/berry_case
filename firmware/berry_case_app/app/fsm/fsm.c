@@ -13,6 +13,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "fsm.h"
+#include "Gpio.h"
 /* private typedef -----------------------------------------------------------*/
 
 /* private define ------------------------------------------------------------*/
@@ -53,6 +54,7 @@ mod_fsm_state_t mod_fsm_state;
 void mod_fsm_display_battery(void)
 {
 		mod_fsm_state = DISPLAY_IP_ADDR;
+		uint8_t x= get_Gpio_select_btn();
 }
 
 void mod_fsm_state_display_battery(void)
