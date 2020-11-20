@@ -1,11 +1,6 @@
 /.mxproject
 build
 ideScripts
-.vscode
 *.backup
 *.code-workspace
 __pycache__
-.vscode/
-ideScripts/
-/project_update.sh
-/project_update.bat
