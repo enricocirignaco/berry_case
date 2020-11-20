@@ -1,5 +1,10 @@
-
 /.mxproject
-build
+build/
 *.backup
+*.code-workspace
 __pycache__
+ideScripts/
+/project_update.sh
+/project_update.bat
+.vscode/*
+!.vscode/c_cpp_properties.json
