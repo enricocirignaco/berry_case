@@ -66,12 +66,12 @@
             "STM32F030x6"
         ],
         "gccExePath": "/usr/bin/arm-none-eabi-gcc",
-        "gccIncludePath": "/usr/lib/gcc/arm-none-eabi/9.2.1/include"
+        "gccIncludePath": "C:/MinGW/mingw64/include"
     },
     "configurations": [
         {
             "name": "berry_case_app",
-            "intelliSenseMode": "msvc-x64",
+            "intelliSenseMode": "gcc-arm",
             "includePath": [
                 "${workspaceFolder}",
                 "${cubemx_includes}",
@@ -97,7 +97,7 @@
                 "${user_asmDefines}"
             ],
             "forcedInclude": [],
-            "compilerPath": "${gccExePath}",
+            "compilerPath": "C:/MinGW/mingw64/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++17"
         }
