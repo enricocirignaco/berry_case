@@ -105,6 +105,12 @@ def draw_confirm_yes():
     draw.text((17,6), "Yes", font=font, fill=0)
     draw.text((77,6), "No", font=font, fill=255)
     update_display()
+def draw_fan_speed(speed):
+    draw_empty()
+    for speed in range(0,10):
+        draw.rectangle((10+(10*speed),6,20+(10*speed),24), outline=255, fill=255)
+    update_display()
+
 
 def btn_callback(arg):
     global display_ptr
@@ -132,5 +138,6 @@ GPIO.add_event_callback(gpio, btn_callback)
 while True:
     draw_confirm_yes()
     time.sleep(2)
-    draw_confirm_no()
+    #draw_confirm_no()
+    draw_fan_speed()
     time.sleep(2)
