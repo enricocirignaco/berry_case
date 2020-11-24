@@ -1,5 +1,0 @@
-Record=TopLevelDocument|FileName=main.SchDoc
-Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=U_MCU|SchDesignator=U_MCU|FileName=MCU.SchDoc|SymbolType=Normal|RawFileName=MCU.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=U_power_supply|SchDesignator=U_power_supply|FileName=power_supply.SchDoc|SymbolType=Normal|RawFileName=power_supply.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=U_power_supply_v2|SchDesignator=U_power_supply_v2|FileName=power_supply_v2.SchDoc|SymbolType=Normal|RawFileName=power_supply_v2.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|SourceDocument=main.SchDoc|Designator=U_raspberry_interface|SchDesignator=U_raspberry_interface|FileName=raspberry_interface.SchDoc|SymbolType=Normal|RawFileName=raspberry_interface.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
