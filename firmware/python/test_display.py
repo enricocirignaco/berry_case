@@ -34,7 +34,7 @@ BTN_CENTER_GPIO = 23 #not working yet
 BASH_COMMANDS = {
     "SSID":"iwgetid -r",
     "IP":"hostname -I | cut -d' ' -f1",
-    "HOSTNAME":"hostname"
+    "HOST":"hostname"
 }
 DEPTH_0_LABELS = [
     "Network",
@@ -63,6 +63,7 @@ DISPLAY_WIDTH = 128
 DISPLAY_HEIGHT = 32
 FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 MAIN_ENTRY_FONT_SIZE = 18
+NETWORK_ENTRY_FONT_SIZE = 12
 # Init Oled Display
 #############################################################################
 # Create the I2C interface.
@@ -218,12 +219,12 @@ def btn_down_callback(arg):
         if main_menu_entry == 0:
             if network_menu_entry < NETWORK_MENU_ENTRY_CNT-1:
                 network_menu_entry+= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], 15)
+                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry]), 15
+                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
         
 # Callback up button
@@ -243,12 +244,12 @@ def btn_up_callback(arg):
         if main_menu_entry == 0:
             if network_menu_entry > 0:
                 network_menu_entry-= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], 15)
+                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], 15)
+                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
 
 # Callback center button
