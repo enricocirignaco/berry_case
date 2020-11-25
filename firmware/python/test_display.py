@@ -1,11 +1,4 @@
 
-"""
-menu = ("eins":2,"zwei":"einun")
-menu['eins']
-"""
-
-
-
 # Project:   berry_case
 # File:      main program
 # Autor:     Enrico Cirignaco
@@ -118,7 +111,7 @@ def draw_confirm_no():
     draw.text((77,6), "No", font=font, fill=0)
     update_display()
 
-def draw_confirm_yes(speed):
+def draw_confirm_yes():
     draw_empty()
     draw.rectangle((12,6,57,24), outline=255, fill=255)
     draw.rectangle((69,6,114,24), outline=255, fill=0)
@@ -156,26 +149,28 @@ def logic():
     global menu_entry
     
 def btn_right_callback(arg):
+    pass
     #if depth=0 do nothing
 
 def btn_left_callback():
+    pass
     #if depth=0 do nothing
         
 def btn_down_callback():
     if menu_depth == 0:
         if menu_entry < MENU_ENTRY_CNT-1:
-            menu_entry=+
+            menu_entry+= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
 
 def btn_up_callback():
     if menu_depth == 0:
         if menu_entry > 0:
-            menu_entry=+
+            menu_entry+= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
 
 def btn_center_callback():
     if menu_depth == 0:
-        menu_depth=+
+        menu_depth+= 1
         #update display
          
 GPIO.add_event_callback(btn_up_gpio, btn_up_callback)
@@ -187,4 +182,7 @@ GPIO.add_event_callback(btn_center_gpio, btn_center_callback)
 #############################################################################
 # Endless loop
 while True:
-    pass
+    draw_confirm_no()
+    time.sleep(2)
+    draw_confirm_yes()
+    time.sleep(2)
