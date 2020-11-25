@@ -46,7 +46,7 @@ btn_right_gpio = 27
 btn_left_gpio = 4
 btn_up_gpio = 17
 btn_down_gpio = 22
-btn_center_gpio = 2 #to be changed
+btn_center_gpio = 23 #to be changed
 
 GPIO.setmode(GPIO.BCM)
 # Setup GPIOs as INout with pullup resistor
@@ -157,18 +157,27 @@ def btn_left_callback():
     #if depth=0 do nothing
         
 def btn_down_callback():
+    global menu_depth
+    global menu_entry
+
     if menu_depth == 0:
         if menu_entry < MENU_ENTRY_CNT-1:
             menu_entry+= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
 
 def btn_up_callback():
+    global menu_depth
+    global menu_entry
+
     if menu_depth == 0:
         if menu_entry > 0:
             menu_entry+= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
 
 def btn_center_callback():
+    global menu_depth
+    global menu_entry
+    
     if menu_depth == 0:
         menu_depth+= 1
         #update display
