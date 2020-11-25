@@ -156,29 +156,29 @@ def update_submenu():
     is_yes_state = False
     is_fan_mode_auto = False
 
-    elif(main_menu_entry == 0):
+    if main_menu_entry == 0:
         #net
         draw_entry("SSID")
-    elif(main_menu_entry == 1):
+    elif main_menu_entry == 1:
         #system info
         draw_entry("CPU temp")
     # reboot submenu
-    elif(main_menu_entry == 2 ):
-        if(is_yes_state):
+    elif main_menu_entry == 2 :
+        if is_yes_state:
             draw_confirm_no()
         else:
             draw_confirm_yes()
         is_yes_state = not is_yes_state
 
-    elif(main_menu_entry == 3):
-        if(is_yes_state):
+    elif main_menu_entry == 3:
+        if is_yes_state:
             draw_confirm_no()
         else:
             draw_confirm_yes()
         is_yes_state = not is_yes_state
 
-    elif(main_menu_entry == 4):
-        if(is_fan_mode_auto):
+    elif main_menu_entry == 4:
+        if is_fan_mode_auto:
             draw_fan_manual()
         else:
             draw_fan_auto()
@@ -190,21 +190,23 @@ def update_submenu():
 def btn_right_callback(arg):
     global menu_depth
     global main_menu_entry
-
+    global network_menu_entry
+    global system_info_menu_entry
+    
     # if in main menu go inside submenu
     if menu_depth == 0:
         menu_depth+= 1
         update_submenu()
 
 # Callback if left button is pressed  
-def btn_left_callback():
+def btn_left_callback(arg):
     global menu_depth
     global main_menu_entry
     pass
     #if depth=0 do nothing
 
 # Callback if down button is pressed  
-def btn_down_callback():
+def btn_down_callback(arg):
     global menu_depth
     global main_menu_entry
     global network_menu_entry
@@ -217,20 +219,22 @@ def btn_down_callback():
             draw_entry(DEPTH_0_LABELS[main_menu_entry])
     elif menu_depth ==1:
         #network submenu
-        if main_menu_entry = 0:
+        if main_menu_entry == 0:
             if network_menu_entry < NETWORK_MENU_ENTRY_CNT-1:
                 network_menu_entry+= 1
                 draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry])
         # system info submenu
-        elif main_menu_entry = 1:
+        elif main_menu_entry == 1:
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
         
 # Callback if up button is pressed  
-def btn_up_callback():
+def btn_up_callback(arg):
     global menu_depth
     global main_menu_entry
+    global network_menu_entry
+    global system_info_menu_entry
 
     # if in main menu scroll to previous menu
     if menu_depth == 0:
@@ -239,18 +243,18 @@ def btn_up_callback():
             draw_entry(DEPTH_0_LABELS[main_menu_entry])
     elif menu_depth == 1:
         #network submenu
-        if main_menu_entry = 0:
+        if main_menu_entry == 0:
             if network_menu_entry > 0:
                 network_menu_entry-= 1
                 draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry])
         # system info submenu
-        elif main_menu_entry = 1:
+        elif main_menu_entry == 1:
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
 
 # Callback if center button is pressed  
-def btn_center_callback():
+def btn_center_callback(arg):
     global menu_depth
     global main_menu_entry
     
@@ -269,7 +273,8 @@ GPIO.add_event_callback(btn_right_gpio, btn_right_callback)
 GPIO.add_event_callback(btn_left_gpio, btn_left_callback)
 GPIO.add_event_callback(btn_center_gpio, btn_center_callback)
 
+draw_entry(DEPTH_0_LABELS[0])
 #############################################################################
 # Endless loop
 while True:
-
+    pass
