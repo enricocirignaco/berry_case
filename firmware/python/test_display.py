@@ -150,7 +150,7 @@ def update_submenu():
 
     if main_menu_entry == 0:
         #net
-        draw_entry(DEPTH_1_NETWORK_LABELS[0], MAIN_ENTRY_FONT_SIZE)
+        draw_entry(DEPTH_1_NETWORK_LABELS[0], NETWORK_ENTRY_FONT_SIZE)
     elif main_menu_entry == 1:
         #system info
         draw_entry("CPU temp", 10)
