@@ -1,4 +1,11 @@
 
+"""
+menu = ("eins":2,"zwei":"einun")
+menu['eins']
+"""
+
+
+
 # Project:   berry_case
 # File:      main program
 # Autor:     Enrico Cirignaco
@@ -21,7 +28,16 @@ top_padding = 6
 right_padding = 6
 display_ptr = 'network'
 fan = 0
-
+menu_depth = 0
+menu_entry = 0
+MENU_ENTRY_CNT = 5
+DEPTH_0_LABELS = [
+    "Network",
+    "System Info",
+    "Reboot",
+    "Power OFF",
+    "Fan Settings"
+]
 class current_position(Enum):
     MAIN_NETWORK = 1
     MAIN_SYSTEM_INFO = 2
@@ -37,6 +53,7 @@ btn_right_gpio = 27
 btn_left_gpio = 4
 btn_up_gpio = 17
 btn_down_gpio = 22
+btn_center_gpio = 2 #to be changed
 
 GPIO.setmode(GPIO.BCM)
 # Setup GPIOs as INout with pullup resistor
@@ -44,11 +61,13 @@ GPIO.setup(btn_right_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(btn_left_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(btn_up_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(btn_down_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(btn_center_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Create callback event for every GPIOs
 GPIO.add_event_detect(btn_right_gpio, GPIO.FALLING)
 GPIO.add_event_detect(btn_left_gpio, GPIO.FALLING)
 GPIO.add_event_detect(btn_up_gpio, GPIO.FALLING)
 GPIO.add_event_detect(btn_down_gpio, GPIO.FALLING)
+GPIO.add_event_detect(btn_center_gpio, GPIO.FALLING)
 
 #############################################################################
 # Init Oled Display
@@ -86,35 +105,11 @@ def update_display():
     display.image(image)
     display.show()
 
-def draw_network():
+def draw_entry(title):
     draw_empty()
-    draw.text((right_padding, top_padding), "Network", font=font, fill=255)
-    global display_ptr
-    display_ptr = 'network'
+    draw.text((right_padding, top_padding), title, font=font, fill=255)
+    update_display()
 
-def draw_system_info():
-    draw_empty()
-    draw.text((right_padding, top_padding), "System Info", font=font, fill=255)
-    global display_ptr
-    display_ptr = 'system_info'
-
-def draw_reboot():
-    draw_empty()
-    draw.text((right_padding, top_padding), "Reboot", font=font, fill=255)
-    global display_ptr
-    display_ptr = 'reboot'
-
-def draw_power_off():
-    draw_empty()
-    draw.text((right_padding, top_padding), "Power OFF", font=font, fill=255)
-    global display_ptr
-    display_ptr = 'power_off'
-
-def draw_fan_settings():
-    draw_empty()
-    draw.text((right_padding, top_padding), "Fan Settings", font=font, fill=255)
-    global display_ptr
-    display_ptr = 'fan_settings'
 def draw_confirm_no():
     draw_empty()
     draw.rectangle((12,6,57,24), outline=255, fill=0)
@@ -153,39 +148,43 @@ def draw_fan_manual():
     draw.text((73,6), "Man", font=font, fill=0)
     update_display()
 
-def btn_right_callback(arg):
-    global display_ptr
-    print(display_ptr)
 
-    if display_ptr == 'network':
-        draw_system_info()
-    elif display_ptr == 'system_info':
-        draw_reboot()
-    elif display_ptr == 'reboot':
-        draw_power_off()
-    elif display_ptr == 'power_off':
-        draw_fan_settings()
-    elif display_ptr == 'fan_settings':
-        draw_network()
-    update_display()
-def btn_left_callback():
-    draw_confirm_no()
-def btn_down_callback():
-    draw_confirm_no()
-def btn_up_callback():
-    #debouncing button
-    time.sleep(0.5)
+
+
+def logic():
+    global menu_depth
+    global menu_entry
     
-GPIO.add_event_callback(btn_down_gpio, btn_up_callback)
-GPIO.add_event_callback(btn_down_gpio, btn_down_callback)
-GPIO.add_event_callback(btn_down_gpio, btn_right_callback)
-GPIO.add_event_callback(btn_down_gpio, btn_left_callback)
+def btn_right_callback(arg):
+    #if depth=0 do nothing
 
+def btn_left_callback():
+    #if depth=0 do nothing
+        
+def btn_down_callback():
+    if menu_depth == 0:
+        if menu_entry < MENU_ENTRY_CNT-1:
+            menu_entry=+
+            draw_entry(DEPTH_0_LABELS[menu_entry])
+
+def btn_up_callback():
+    if menu_depth == 0:
+        if menu_entry > 0:
+            menu_entry=+
+            draw_entry(DEPTH_0_LABELS[menu_entry])
+
+def btn_center_callback():
+    if menu_depth == 0:
+        menu_depth=+
+        #update display
+         
+GPIO.add_event_callback(btn_up_gpio, btn_up_callback)
+GPIO.add_event_callback(btn_down_gpio, btn_down_callback)
+GPIO.add_event_callback(btn_right_gpio, btn_right_callback)
+GPIO.add_event_callback(btn_left_gpio, btn_left_callback)
+GPIO.add_event_callback(btn_center_gpio, btn_center_callback)
 
 #############################################################################
 # Endless loop
 while True:
-    draw_fan_auto()
-    time.sleep(2)
-    draw_fan_manual()
-    time.sleep(2)
+    pass
