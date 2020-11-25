@@ -61,7 +61,8 @@ TOP_PADDING = 6
 RIGHT_PADDING = 6
 DISPLAY_WIDTH = 128
 DISPLAY_HEIGHT = 32
-
+FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+MAIN_ENTRY_FONT_SIZE = 18
 # Init Oled Display
 #############################################################################
 # Create the I2C interface.
@@ -96,6 +97,7 @@ def update_display():
     display.show()
 
 def draw_entry(entry_name, font_size):
+    font = ImageFont.truetype(FONT_PATH, font_size)
     draw_empty()
     draw.text((RIGHT_PADDING, TOP_PADDING), entry_name, font=font, fill=255)
     update_display()
@@ -147,10 +149,10 @@ def update_submenu():
 
     if main_menu_entry == 0:
         #net
-        draw_entry("SSID")
+        draw_entry("SSID", MAIN_ENTRY_FONT_SIZE)
     elif main_menu_entry == 1:
         #system info
-        draw_entry("CPU temp")
+        draw_entry("CPU temp", 10)
     # reboot submenu
     elif main_menu_entry == 2 :
         if is_yes_state:
@@ -188,7 +190,7 @@ def btn_right_callback(arg):
         update_submenu()
     elif menu_depth == 1:
         menu_depth-= 1
-        draw_entry(DEPTH_0_LABELS[main_menu_entry])
+        draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
 
 # Callback left button
@@ -210,18 +212,18 @@ def btn_down_callback(arg):
     if menu_depth == 0:
         if main_menu_entry < MAIN_MENU_ENTRY_CNT-1:
             main_menu_entry+= 1
-            draw_entry(DEPTH_0_LABELS[main_menu_entry])
+            draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     elif menu_depth ==1:
         #network submenu
         if main_menu_entry == 0:
             if network_menu_entry < NETWORK_MENU_ENTRY_CNT-1:
                 network_menu_entry+= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry])
+                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], 15)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
+                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry]), 15
     time.sleep(DEBOUNCING_TIME_S)
         
 # Callback up button
@@ -235,18 +237,18 @@ def btn_up_callback(arg):
     if menu_depth == 0:
         if main_menu_entry > 0:
             main_menu_entry-= 1
-            draw_entry(DEPTH_0_LABELS[main_menu_entry])
+            draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     elif menu_depth == 1:
         #network submenu
         if main_menu_entry == 0:
             if network_menu_entry > 0:
                 network_menu_entry-= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry])
+                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], 15)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
+                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], 15)
     time.sleep(DEBOUNCING_TIME_S)
 
 # Callback center button
@@ -318,7 +320,7 @@ GPIO.add_event_callback(BTN_CENTER_GPIO, btn_center_callback)
 
 # Setup
 #############################################################################
-draw_entry(DEPTH_0_LABELS[0])
+draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
 
 # Endless Loop
 #############################################################################
