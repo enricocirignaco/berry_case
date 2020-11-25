@@ -27,8 +27,8 @@ system_info_menu_entry = 0
 #############################################################################
 BTN_RIGHT_GPIO = 27
 BTN_LEFT_GPIO = 4
+BTN_UP_GPIO = 22
 BTN_DOWN_GPIO = 17
-BTN_DOWN_GPIO = 22
 BTN_CENTER_GPIO = 23 #not working yet
 
 BASH_COMMANDS = {
@@ -83,7 +83,6 @@ draw = ImageDraw.Draw(image)
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the
 # same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 18)
 
 # Display functions
 #############################################################################
@@ -96,7 +95,7 @@ def update_display():
     display.image(image)
     display.show()
 
-def draw_entry(entry_name):
+def draw_entry(entry_name, font_size):
     draw_empty()
     draw.text((RIGHT_PADDING, TOP_PADDING), entry_name, font=font, fill=255)
     update_display()
@@ -302,17 +301,17 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BTN_RIGHT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BTN_LEFT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BTN_DOWN_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_down_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BTN_UP_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(BTN_CENTER_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Create callback event for every GPIOs on falling edge
 GPIO.add_event_detect(BTN_RIGHT_GPIO, GPIO.FALLING)
 GPIO.add_event_detect(BTN_LEFT_GPIO, GPIO.FALLING)
 GPIO.add_event_detect(BTN_DOWN_GPIO, GPIO.FALLING)
-GPIO.add_event_detect(btn_down_gpio, GPIO.FALLING)
+GPIO.add_event_detect(BTN_UP_GPIO, GPIO.FALLING)
 GPIO.add_event_detect(BTN_CENTER_GPIO, GPIO.FALLING)
 # Define callback functions to be called
 GPIO.add_event_callback(BTN_DOWN_GPIO, btn_up_callback)
-GPIO.add_event_callback(btn_down_gpio, btn_down_callback)
+GPIO.add_event_callback(BTN_UP_GPIO, btn_down_callback)
 GPIO.add_event_callback(BTN_RIGHT_GPIO, btn_right_callback)
 GPIO.add_event_callback(BTN_LEFT_GPIO, btn_left_callback)
 GPIO.add_event_callback(BTN_CENTER_GPIO, btn_center_callback)
