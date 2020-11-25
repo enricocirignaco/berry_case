@@ -152,29 +152,31 @@ def btn_right_callback(arg):
     pass
     #if depth=0 do nothing
 
-def btn_left_callback():
+def btn_left_callback(arg):
     pass
     #if depth=0 do nothing
         
-def btn_down_callback():
+def btn_down_callback(arg):
     global menu_depth
     global menu_entry
-
+    
     if menu_depth == 0:
         if menu_entry < MENU_ENTRY_CNT-1:
             menu_entry+= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
+    time.sleep(0.5)
 
-def btn_up_callback():
+def btn_up_callback(arg):
     global menu_depth
     global menu_entry
 
     if menu_depth == 0:
         if menu_entry > 0:
-            menu_entry+= 1
+            menu_entry-= 1
             draw_entry(DEPTH_0_LABELS[menu_entry])
+    time.sleep(0.5)
 
-def btn_center_callback():
+def btn_center_callback(arg):
     global menu_depth
     global menu_entry
     
@@ -188,10 +190,8 @@ GPIO.add_event_callback(btn_right_gpio, btn_right_callback)
 GPIO.add_event_callback(btn_left_gpio, btn_left_callback)
 GPIO.add_event_callback(btn_center_gpio, btn_center_callback)
 
+draw_entry(DEPTH_0_LABELS[0])
 #############################################################################
 # Endless loop
 while True:
-    draw_confirm_no()
-    time.sleep(2)
-    draw_confirm_yes()
-    time.sleep(2)
+    pass
