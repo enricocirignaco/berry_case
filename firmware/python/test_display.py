@@ -26,10 +26,11 @@ main_menu_entry = 0
 network_menu_entry = 0
 system_info_menu_entry = 0
 
+#constants
 MAIN_MENU_ENTRY_CNT = 5
 NETWORK_MENU_ENTRY_CNT = 4
 SYSTEM_INFO_MENU_ENTRY_CNT = 3
-
+DEBOUNCING_TIME_S = 0.5
 DEPTH_0_LABELS = [
     "Network",
     "System Info",
@@ -192,11 +193,15 @@ def btn_right_callback(arg):
     global main_menu_entry
     global network_menu_entry
     global system_info_menu_entry
-    
+
     # if in main menu go inside submenu
     if menu_depth == 0:
         menu_depth+= 1
         update_submenu()
+    elif menu_depth == 1:
+        menu_depth-= 1
+        draw_entry(DEPTH_0_LABELS[main_menu_entry])
+    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback if left button is pressed  
 def btn_left_callback(arg):
@@ -204,6 +209,7 @@ def btn_left_callback(arg):
     global main_menu_entry
     pass
     #if depth=0 do nothing
+    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback if down button is pressed  
 def btn_down_callback(arg):
@@ -228,6 +234,7 @@ def btn_down_callback(arg):
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
+    time.sleep(DEBOUNCING_TIME_S)
         
 # Callback if up button is pressed  
 def btn_up_callback(arg):
@@ -252,11 +259,14 @@ def btn_up_callback(arg):
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
+    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback if center button is pressed  
 def btn_center_callback(arg):
     global menu_depth
     global main_menu_entry
+    pass
+    time.sleep(DEBOUNCING_TIME_S)
     
     # if in main menu go inside submenu
     if menu_depth == 0:
