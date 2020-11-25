@@ -4,7 +4,7 @@
 # Autor:     Enrico Cirignaco
 # Created:   22.11.2020
 
-# import modules
+# Import modules
 #############################################################################
 import time
 import subprocess
@@ -15,22 +15,27 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
 from enum import Enum
 
-#############################################################################
 # Define variables
-top_padding = 6
-right_padding = 6
-display_ptr = 'network'
+#############################################################################
 fan = 0
 menu_depth = 0
 main_menu_entry = 0
 network_menu_entry = 0
 system_info_menu_entry = 0
 
-#constants
-MAIN_MENU_ENTRY_CNT = 5
-NETWORK_MENU_ENTRY_CNT = 4
-SYSTEM_INFO_MENU_ENTRY_CNT = 3
-DEBOUNCING_TIME_S = 0.5
+# Define constants
+#############################################################################
+BTN_RIGHT_GPIO = 27
+BTN_LEFT_GPIO = 4
+BTN_DOWN_GPIO = 17
+BTN_DOWN_GPIO = 22
+BTN_CENTER_GPIO = 23 #not working yet
+
+BASH_COMMANDS = {
+    "SSID":"iwgetid -r",
+    "IP":"hostname -I | cut -d' ' -f1",
+    "HOSTNAME":"hostname"
+}
 DEPTH_0_LABELS = [
     "Network",
     "System Info",
@@ -39,55 +44,38 @@ DEPTH_0_LABELS = [
     "Fan Settings"
 ]
 DEPTH_1_NETWORK_LABELS =[
-    "SSID:",
-    "IP:",
-    "Network:",
-    "Hostname:"
+    "SSID:" + subprocess.check_output(BASH_COMMANDS["SSID"], shell=True).decode("utf-8"),
+    "IP:" + subprocess.check_output(BASH_COMMANDS["IP"], shell=True).decode("utf-8"),
+    "Hostname:" + subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
 ]
 DEPTH_1_SYSTEM_INFO_LABELS = [
     "CPU Load:",
     "CPU Temp:",
     "RAM Usage:"
 ]
+MAIN_MENU_ENTRY_CNT = len(DEPTH_0_LABELS)
+NETWORK_MENU_ENTRY_CNT = len(DEPTH_1_NETWORK_LABELS)
+SYSTEM_INFO_MENU_ENTRY_CNT = len(DEPTH_1_SYSTEM_INFO_LABELS)
+DEBOUNCING_TIME_S = 0.5
+TOP_PADDING = 6
+RIGHT_PADDING = 6
+DISPLAY_WIDTH = 128
+DISPLAY_HEIGHT = 32
 
-#############################################################################
-# Init navigation button
-btn_right_gpio = 27
-btn_left_gpio = 4
-btn_up_gpio = 17
-btn_down_gpio = 22
-btn_center_gpio = 23 #to be changed
-
-GPIO.setmode(GPIO.BCM)
-# Setup GPIOs as INout with pullup resistor
-GPIO.setup(btn_right_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_left_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_up_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_down_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(btn_center_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-# Create callback event for every GPIOs
-GPIO.add_event_detect(btn_right_gpio, GPIO.FALLING)
-GPIO.add_event_detect(btn_left_gpio, GPIO.FALLING)
-GPIO.add_event_detect(btn_up_gpio, GPIO.FALLING)
-GPIO.add_event_detect(btn_down_gpio, GPIO.FALLING)
-GPIO.add_event_detect(btn_center_gpio, GPIO.FALLING)
-
-#############################################################################
 # Init Oled Display
+#############################################################################
 # Create the I2C interface.
 i2c = busio.I2C(SCL, SDA)
 # Create the SSD1306 OLED class.
 # The first two parameters are the pixel width and pixel height.  Change these
 # to the right size for your display!
-display = adafruit_ssd1306.SSD1306_I2C(128, 32, i2c)
+display = adafruit_ssd1306.SSD1306_I2C(DISPLAY_WIDTH, DISPLAY_HEIGHT, i2c)
 # Clear display.
 display.fill(0)
 display.show()
 # Create blank image for drawing.
 # Make sure to create image with mode '1' for 1-bit color.
-width = display.width
-height = display.height
-image = Image.new("1", (width, height))
+image = Image.new("1", (DISPLAY_WIDTH, DISPLAY_HEIGHT))
 # Get drawing object to draw on image.
 draw = ImageDraw.Draw(image)
 # Load default font.
@@ -97,11 +85,11 @@ draw = ImageDraw.Draw(image)
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
 font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 18)
 
+# Display functions
 #############################################################################
-# functions
 def draw_empty():
     # Draw a black filled box to clear the image.
-    draw.rectangle((0, 0, width-1, height-1), outline=255, fill=0)
+    draw.rectangle((0, 0, DISPLAY_WIDTH-1, DISPLAY_HEIGHT-1), outline=255, fill=0)
 
 def update_display():
     # Display image.
@@ -110,7 +98,7 @@ def update_display():
 
 def draw_entry(entry_name):
     draw_empty()
-    draw.text((right_padding, top_padding), entry_name, font=font, fill=255)
+    draw.text((RIGHT_PADDING, TOP_PADDING), entry_name, font=font, fill=255)
     update_display()
 
 def draw_confirm_no():
@@ -151,7 +139,8 @@ def draw_fan_manual():
     draw.text((73,6), "Man", font=font, fill=0)
     update_display()
 
-
+# menu functions
+#############################################################################
 def update_submenu():
     global main_menu_entry
     is_yes_state = False
@@ -185,9 +174,9 @@ def update_submenu():
             draw_fan_auto()
         is_fan_mode_auto = not is_fan_mode_auto
 
-
-  
-# Callback if right button is pressed  
+#############################################################################
+# GPIO Callbacks
+# Callback right button  
 def btn_right_callback(arg):
     global menu_depth
     global main_menu_entry
@@ -203,7 +192,7 @@ def btn_right_callback(arg):
         draw_entry(DEPTH_0_LABELS[main_menu_entry])
     time.sleep(DEBOUNCING_TIME_S)
 
-# Callback if left button is pressed  
+# Callback left button
 def btn_left_callback(arg):
     global menu_depth
     global main_menu_entry
@@ -211,7 +200,7 @@ def btn_left_callback(arg):
     #if depth=0 do nothing
     time.sleep(DEBOUNCING_TIME_S)
 
-# Callback if down button is pressed  
+# Callback down button 
 def btn_down_callback(arg):
     global menu_depth
     global main_menu_entry
@@ -236,7 +225,7 @@ def btn_down_callback(arg):
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
     time.sleep(DEBOUNCING_TIME_S)
         
-# Callback if up button is pressed  
+# Callback up button
 def btn_up_callback(arg):
     global menu_depth
     global main_menu_entry
@@ -261,7 +250,7 @@ def btn_up_callback(arg):
                 draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry])
     time.sleep(DEBOUNCING_TIME_S)
 
-# Callback if center button is pressed  
+# Callback center button
 def btn_center_callback(arg):
     global menu_depth
     global main_menu_entry
@@ -273,18 +262,66 @@ def btn_center_callback(arg):
         menu_depth+= 1
         #update display
 
-
-
-
-
-GPIO.add_event_callback(btn_up_gpio, btn_up_callback)
-GPIO.add_event_callback(btn_down_gpio, btn_down_callback)
-GPIO.add_event_callback(btn_right_gpio, btn_right_callback)
-GPIO.add_event_callback(btn_left_gpio, btn_left_callback)
-GPIO.add_event_callback(btn_center_gpio, btn_center_callback)
-
-draw_entry(DEPTH_0_LABELS[0])
 #############################################################################
-# Endless loop
+# get data functions
+# Shell scripts for system monitoring from here:
+# https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
+
+def get_system_ip():
+    cmd = "hostname -I | cut -d' ' -f1"
+    ip = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return ip
+def get_system_cpu():
+    cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
+    cpu = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return cpu
+def get_system_memory():
+    cmd = "free -m | awk 'NR==2{printf \"Mem: %s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
+    mem = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return mem
+def get_system_disk():
+    cmd = 'df -h | awk \'$NF=="/"{printf "Disk: %d/%d GB  %s", $3,$2,$5}\''
+    disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return disk
+def get_system_hostname():
+    cmd = "hostname"
+    hostname = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return hostname
+def get_system_ssid():
+    cmd = "iwgetid -r"
+    ssid = subprocess.check_output(cmd, shell=True).decode("utf-8")
+    return ssid
+
+
+
+
+# Init navigation button
+#############################################################################
+GPIO.setmode(GPIO.BCM)
+# Setup GPIOs as input with pullup resistor
+GPIO.setup(BTN_RIGHT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BTN_LEFT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BTN_DOWN_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(btn_down_gpio, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(BTN_CENTER_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# Create callback event for every GPIOs on falling edge
+GPIO.add_event_detect(BTN_RIGHT_GPIO, GPIO.FALLING)
+GPIO.add_event_detect(BTN_LEFT_GPIO, GPIO.FALLING)
+GPIO.add_event_detect(BTN_DOWN_GPIO, GPIO.FALLING)
+GPIO.add_event_detect(btn_down_gpio, GPIO.FALLING)
+GPIO.add_event_detect(BTN_CENTER_GPIO, GPIO.FALLING)
+# Define callback functions to be called
+GPIO.add_event_callback(BTN_DOWN_GPIO, btn_up_callback)
+GPIO.add_event_callback(btn_down_gpio, btn_down_callback)
+GPIO.add_event_callback(BTN_RIGHT_GPIO, btn_right_callback)
+GPIO.add_event_callback(BTN_LEFT_GPIO, btn_left_callback)
+GPIO.add_event_callback(BTN_CENTER_GPIO, btn_center_callback)
+
+# Setup
+#############################################################################
+draw_entry(DEPTH_0_LABELS[0])
+
+# Endless Loop
+#############################################################################
 while True:
     pass
