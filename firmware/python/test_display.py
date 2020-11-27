@@ -7,9 +7,9 @@
 # Import modules
 #############################################################################
 import time
-import subprocess
 import oled_display
 import gpio
+import subprocess
 
 # Define variables
 #############################################################################
@@ -101,7 +101,7 @@ def btn_right_callback(arg):
     elif menu_depth == 1:
         menu_depth-= 1
         oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
+    time.sleep(gpio.DEBOUNCING_TIME_S)
 
 # Callback left button
 def btn_left_callback(arg):
@@ -109,7 +109,7 @@ def btn_left_callback(arg):
     global main_menu_entry
     pass
     #if depth=0 do nothing
-    time.sleep(DEBOUNCING_TIME_S)
+    time.sleep(gpio.DEBOUNCING_TIME_S)
 
 # Callback down button 
 def btn_down_callback(arg):
@@ -134,7 +134,7 @@ def btn_down_callback(arg):
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
                 oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
+    time.sleep(gpio.DEBOUNCING_TIME_S)
         
 # Callback up button
 def btn_up_callback(arg):
@@ -159,14 +159,14 @@ def btn_up_callback(arg):
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
                 oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
+    time.sleep(gpio.DEBOUNCING_TIME_S)
 
 # Callback center button
 def btn_center_callback(arg):
     global menu_depth
     global main_menu_entry
     pass
-    time.sleep(DEBOUNCING_TIME_S)
+    time.sleep(gpio.DEBOUNCING_TIME_S)
     
     # if in main menu go inside submenu
     if menu_depth == 0:
@@ -175,7 +175,7 @@ def btn_center_callback(arg):
 
 # Setup
 #############################################################################
-gpio.init()
+#gpio.init()
 oled_display.init()
 oled_display.draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
 

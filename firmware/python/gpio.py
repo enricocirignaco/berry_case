@@ -9,6 +9,7 @@
 import time
 import RPi.GPIO as GPIO
 import test_display
+import subprocess
 
 # Define constants
 #############################################################################
