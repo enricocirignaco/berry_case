@@ -25,7 +25,7 @@ system_info_menu_entry = 0
 BASH_COMMANDS = {
     "SSID":"iwgetid -r",
     "IP":"hostname -I | cut -d' ' -f1",
-    "HOST":"hostname"
+    "HOSTNAME":"hostname"
 }
 DEPTH_0_LABELS = [
     "Network",
@@ -36,8 +36,8 @@ DEPTH_0_LABELS = [
 ]
 DEPTH_1_NETWORK_LABELS =[
     "SSID:" + subprocess.check_output(BASH_COMMANDS["SSID"], shell=True).decode("utf-8"),
-    "IP:" + subprocess.check_output(BASH_COMMANDS["IP"], shell=True).decode("utf-8"),
-    "Hostname:" + subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
+    subprocess.check_output(BASH_COMMANDS["IP"], shell=True).decode("utf-8"),
+    subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
 ]
 DEPTH_1_SYSTEM_INFO_LABELS = [
     "CPU Load:",
@@ -59,7 +59,7 @@ def update_submenu():
 
     if main_menu_entry == 0:
         #net
-        draw_entry("SSID", MAIN_ENTRY_FONT_SIZE)
+        draw_entry(DEPTH_1_NETWORK_LABELS[0], NETWORK_ENTRY_FONT_SIZE)
     elif main_menu_entry == 1:
         #system info
         draw_entry("CPU temp", 10)
