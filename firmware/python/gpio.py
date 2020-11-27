@@ -8,6 +8,7 @@
 #############################################################################
 import time
 import RPi.GPIO as GPIO
+import test_display
 
 # Define constants
 #############################################################################
@@ -34,11 +35,11 @@ def init():
     GPIO.add_event_detect(BTN_UP_GPIO, GPIO.FALLING)
     GPIO.add_event_detect(BTN_CENTER_GPIO, GPIO.FALLING)
     # Define callback functions to be called
-    GPIO.add_event_callback(BTN_DOWN_GPIO, btn_up_callback)
-    GPIO.add_event_callback(BTN_UP_GPIO, btn_down_callback)
-    GPIO.add_event_callback(BTN_RIGHT_GPIO, btn_right_callback)
-    GPIO.add_event_callback(BTN_LEFT_GPIO, btn_left_callback)
-    GPIO.add_event_callback(BTN_CENTER_GPIO, btn_center_callback)
+    GPIO.add_event_callback(BTN_DOWN_GPIO, test_display.btn_up_callback)
+    GPIO.add_event_callback(BTN_UP_GPIO, test_display.btn_down_callback)
+    GPIO.add_event_callback(BTN_RIGHT_GPIO, test_display.btn_right_callback)
+    GPIO.add_event_callback(BTN_LEFT_GPIO, test_display.btn_left_callback)
+    GPIO.add_event_callback(BTN_CENTER_GPIO, test_display.btn_center_callback)
 
 #############################################################################
 # get data functions
