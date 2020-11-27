@@ -59,30 +59,30 @@ def update_submenu():
 
     if main_menu_entry == 0:
         #net
-        draw_entry(DEPTH_1_NETWORK_LABELS[0], NETWORK_ENTRY_FONT_SIZE)
+        oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[0], NETWORK_ENTRY_FONT_SIZE)
     elif main_menu_entry == 1:
         #system info
-        draw_entry("CPU temp", 10)
+        oled_display.draw_entry("CPU temp", 10)
     # reboot submenu
     elif main_menu_entry == 2 :
         if is_yes_state:
-            draw_confirm_no()
+            oled_display.draw_confirm_no()
         else:
-            draw_confirm_yes()
+            oled_display.draw_confirm_yes()
         is_yes_state = not is_yes_state
 
     elif main_menu_entry == 3:
         if is_yes_state:
-            draw_confirm_no()
+            oled_display.draw_confirm_no()
         else:
-            draw_confirm_yes()
+            oled_display.draw_confirm_yes()
         is_yes_state = not is_yes_state
 
     elif main_menu_entry == 4:
         if is_fan_mode_auto:
-            draw_fan_manual()
+            oled_display.draw_fan_manual()
         else:
-            draw_fan_auto()
+            oled_display.draw_fan_auto()
         is_fan_mode_auto = not is_fan_mode_auto
 
 #############################################################################
@@ -100,7 +100,7 @@ def btn_right_callback(arg):
         update_submenu()
     elif menu_depth == 1:
         menu_depth-= 1
-        draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+        oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
 
 # Callback left button
@@ -122,18 +122,18 @@ def btn_down_callback(arg):
     if menu_depth == 0:
         if main_menu_entry < MAIN_MENU_ENTRY_CNT-1:
             main_menu_entry+= 1
-            draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+            oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     elif menu_depth ==1:
         #network submenu
         if main_menu_entry == 0:
             if network_menu_entry < NETWORK_MENU_ENTRY_CNT-1:
                 network_menu_entry+= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+                oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 system_info_menu_entry+= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+                oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
         
 # Callback up button
@@ -147,18 +147,18 @@ def btn_up_callback(arg):
     if menu_depth == 0:
         if main_menu_entry > 0:
             main_menu_entry-= 1
-            draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+            oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
     elif menu_depth == 1:
         #network submenu
         if main_menu_entry == 0:
             if network_menu_entry > 0:
                 network_menu_entry-= 1
-                draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+                oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
         # system info submenu
         elif main_menu_entry == 1:
             if system_info_menu_entry > 0:
                 system_info_menu_entry-= 1
-                draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+                oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
     time.sleep(DEBOUNCING_TIME_S)
 
 # Callback center button
@@ -175,7 +175,9 @@ def btn_center_callback(arg):
 
 # Setup
 #############################################################################
-draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
+gpio.init()
+oled_display.init()
+oled_display.draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
 
 # Endless Loop
 #############################################################################
