@@ -8,7 +8,6 @@
 #############################################################################
 import time
 import RPi.GPIO as GPIO
-import test_display
 
 # Define constants
 #############################################################################
@@ -35,11 +34,111 @@ def init():
     GPIO.add_event_detect(BTN_UP_GPIO, GPIO.FALLING)
     GPIO.add_event_detect(BTN_CENTER_GPIO, GPIO.FALLING)
     # Define callback functions to be called
-    GPIO.add_event_callback(BTN_DOWN_GPIO, test_display.btn_up_callback)
-    GPIO.add_event_callback(BTN_UP_GPIO, test_display.btn_down_callback)
-    GPIO.add_event_callback(BTN_RIGHT_GPIO, test_display.btn_right_callback)
-    GPIO.add_event_callback(BTN_LEFT_GPIO, test_display.btn_left_callback)
-    GPIO.add_event_callback(BTN_CENTER_GPIO, test_display.btn_center_callback)
+    GPIO.add_event_callback(BTN_DOWN_GPIO, btn_up_callback)
+    GPIO.add_event_callback(BTN_UP_GPIO, btn_down_callback)
+    GPIO.add_event_callback(BTN_RIGHT_GPIO, btn_right_callback)
+    GPIO.add_event_callback(BTN_LEFT_GPIO, btn_left_callback)
+    GPIO.add_event_callback(BTN_CENTER_GPIO, btn_center_callback)
+
+
+
+
+#############################################################################
+# GPIO Callbacks
+# Callback right button  
+def btn_right_callback(arg):
+    global menu_depth
+    global main_menu_entry
+    global network_menu_entry
+    global system_info_menu_entry
+
+    # if in main menu go inside submenu
+    if menu_depth == 0:
+        menu_depth+= 1
+        update_submenu()
+    elif menu_depth == 1:
+        menu_depth-= 1
+        oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+    time.sleep(DEBOUNCING_TIME_S)
+
+# Callback left button
+def btn_left_callback(arg):
+    global menu_depth
+    global main_menu_entry
+    pass
+    #if depth=0 do nothing
+    time.sleep(DEBOUNCING_TIME_S)
+
+# Callback down button 
+def btn_down_callback(arg):
+    global menu_depth
+    global main_menu_entry
+    global network_menu_entry
+    global system_info_menu_entry
+
+    # if in main manu scroll to next entry
+    if menu_depth == 0:
+        if main_menu_entry < MAIN_MENU_ENTRY_CNT-1:
+            main_menu_entry+= 1
+            oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+    elif menu_depth ==1:
+        #network submenu
+        if main_menu_entry == 0:
+            if network_menu_entry < NETWORK_MENU_ENTRY_CNT-1:
+                network_menu_entry+= 1
+                oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+        # system info submenu
+        elif main_menu_entry == 1:
+            if system_info_menu_entry < SYSTEM_INFO_MENU_ENTRY_CNT-1:
+                system_info_menu_entry+= 1
+                oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+    time.sleep(DEBOUNCING_TIME_S)
+        
+# Callback up button
+def btn_up_callback(arg):
+    global menu_depth
+    global main_menu_entry
+    global network_menu_entry
+    global system_info_menu_entry
+
+    # if in main menu scroll to previous menu
+    if menu_depth == 0:
+        if main_menu_entry > 0:
+            main_menu_entry-= 1
+            oled_display.draw_entry(DEPTH_0_LABELS[main_menu_entry], MAIN_ENTRY_FONT_SIZE)
+    elif menu_depth == 1:
+        #network submenu
+        if main_menu_entry == 0:
+            if network_menu_entry > 0:
+                network_menu_entry-= 1
+                oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[network_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+        # system info submenu
+        elif main_menu_entry == 1:
+            if system_info_menu_entry > 0:
+                system_info_menu_entry-= 1
+                oled_display.draw_entry(DEPTH_1_SYSTEM_INFO_LABELS[system_info_menu_entry], NETWORK_ENTRY_FONT_SIZE)
+    time.sleep(DEBOUNCING_TIME_S)
+
+# Callback center button
+def btn_center_callback(arg):
+    global menu_depth
+    global main_menu_entry
+    pass
+    time.sleep(DEBOUNCING_TIME_S)
+    
+    # if in main menu go inside submenu
+    if menu_depth == 0:
+        menu_depth+= 1
+        #update display
+
+
+
+
+
+
+
+
+
 
 #############################################################################
 # get data functions
