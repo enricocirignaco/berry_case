@@ -21,10 +21,18 @@ FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 
 #############################################################################
 # Define variables
+i2c	= 0
+display	= 0
+image = 0
+draw = 0
 
 # Init Oled Display
 #############################################################################
 def init():
+    global i2c	
+    global display	
+    global image	
+    global draw
     # Create the I2C interface.
     i2c = busio.I2C(SCL, SDA)
     # Create the SSD1306 OLED class.
