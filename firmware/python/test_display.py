@@ -175,11 +175,14 @@ def btn_center_callback(arg):
 
 # Setup
 #############################################################################
-#gpio.init()
+gpio.init()
 oled_display.init()
 oled_display.draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
 
 # Endless Loop
 #############################################################################
-while True:
-    pass
+try:
+    while True:
+        pass
+except KeyboardInterrupt:
+    gpio.GPIO.cleanup()
