@@ -59,11 +59,7 @@ def update_submenu():
 
     if main_menu_entry == 0:
         #net
-<<<<<<< HEAD
         oled_display.draw_entry(DEPTH_1_NETWORK_LABELS[0], NETWORK_ENTRY_FONT_SIZE)
-=======
-        draw_entry(DEPTH_1_NETWORK_LABELS[0], MAIN_ENTRY_FONT_SIZE)
->>>>>>> parent of 8bde18b... bugfixes
     elif main_menu_entry == 1:
         #system info
         oled_display.draw_entry("CPU temp", 10)
@@ -98,5 +94,8 @@ oled_display.draw_entry(DEPTH_0_LABELS[0], MAIN_ENTRY_FONT_SIZE)
 
 # Endless Loop
 #############################################################################
-while True:
-    pass
+try:
+    while True:
+        pass
+except KeyboardInterrupt:
+    gpio.GPIO.cleanup()
