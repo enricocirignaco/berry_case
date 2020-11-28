@@ -25,11 +25,6 @@ FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 # Init Oled Display
 #############################################################################
 def init():
-    global i2c
-    global display
-    global image
-    global draw
-
     # Create the I2C interface.
     i2c = busio.I2C(SCL, SDA)
     # Create the SSD1306 OLED class.
