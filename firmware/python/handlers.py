@@ -11,6 +11,10 @@ import oled_display
 import parameters
 import globals
 
+
+is_yes_state = False
+is_fan_mode_auto = False
+
 #############################################################################
 # GPIO Callbacks
 # Callback right button  
@@ -19,23 +23,41 @@ def btn_right_callback(arg):
     globals.main_menu_entry
     globals.network_menu_entry
     globals.system_info_menu_entry
+    global is_yes_state
+    global is_fan_mode_auto
 
     # if in main menu go inside submenu
     if globals.menu_depth == 0:
         globals.menu_depth+= 1
         update_submenu()
     elif globals.menu_depth == 1:
-        globals.menu_depth-= 1
-        globals.network_menu_entry = 0
-        globals.system_info_menu_entry = 0
-        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        if globals.main_menu_entry == 0 or globals.main_menu_entry == 1:
+            globals.menu_depth-= 1
+            globals.network_menu_entry = 0
+            globals.system_info_menu_entry = 0
+            oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        else:
+            is_yes_state = False
+            is_fan_mode_auto = False
+            update_submenu()
+
 
 # Callback left button
 def btn_left_callback(arg):
+    global is_yes_state
+    global is_fan_mode_auto
     globals.menu_depth
     globals.main_menu_entry
-    pass
     #if depth=0 do nothing
+
+    if globals.menu_depth == 1:
+        if globals.main_menu_entry == 0 or globals.main_menu_entry == 1:
+            #if network or system submenu do nothing
+            pass
+        else:
+            is_yes_state = True
+            is_fan_mode_auto = True
+            update_submenu()
 
 # Callback down button 
 def btn_down_callback(arg):
@@ -99,8 +121,8 @@ def btn_center_callback(arg):
 # menu functions
 #############################################################################
 def update_submenu():
-    is_yes_state = False
-    is_fan_mode_auto = False
+    global is_yes_state
+    global is_fan_mode_auto
     
     if globals.main_menu_entry == 0:
         #net
@@ -111,21 +133,18 @@ def update_submenu():
     # reboot submenu
     elif globals.main_menu_entry == 2 :
         if is_yes_state:
-            oled_display.draw_confirm_no()
-        else:
             oled_display.draw_confirm_yes()
-        is_yes_state = not is_yes_state
+        else:
+            oled_display.draw_confirm_no()
 
     elif globals.main_menu_entry == 3:
         if is_yes_state:
-            oled_display.draw_confirm_no()
-        else:
             oled_display.draw_confirm_yes()
-        is_yes_state = not is_yes_state
+        else:
+            oled_display.draw_confirm_no()
 
     elif globals.main_menu_entry == 4:
         if is_fan_mode_auto:
-            oled_display.draw_fan_manual()
-        else:
             oled_display.draw_fan_auto()
-        is_fan_mode_auto = not is_fan_mode_auto
+        else:
+            oled_display.draw_fan_manual()
