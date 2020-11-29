@@ -79,10 +79,25 @@ def draw_selection(left_selection, right_selection, is_left_selection):
     draw.text((77,6), right_selection, font=font, fill=left_selection_fill)
     update_display()
 
-
+# speed range 0-10
 def draw_fan_speed(speed):
     draw_empty()
     for i in range(0,speed):
         draw.rectangle((11+(11*i),6,17+(11*i),24), outline=255, fill=255)
     update_display()
+
+def draw_charging_screen(charge):
+    font = ImageFont.truetype(parameters.FONT_PATH, 15)
+    draw_empty()
+
+    if charge == 100:
+        draw.text((parameters.RIGHT_PADDING,parameters.TOP_PADDING), "Fully Charged", font=font, fill=255)
+    else:
+        charge = "Charging..." + str(charge) + "%"
+        draw.text((parameters.RIGHT_PADDING,parameters.TOP_PADDING), charge, font=font, fill=255)
+    update_display()
+
+
+    
+    
 
