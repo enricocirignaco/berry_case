@@ -10,7 +10,7 @@ import time
 import oled_display
 import parameters
 import globals
-
+import subprocess
 
 is_yes_state = False
 is_fan_mode_auto = False
@@ -100,12 +100,21 @@ def btn_up_callback(arg):
 # Callback center button
 def btn_center_callback(arg):
     globals.display_counter = 0
-    pass
+    global is_yes_state
+    global is_fan_mode_auto
     
     # if in main menu go inside submenu
     if globals.menu_depth == 0:
         globals.menu_depth+= 1
         #update display
+    elif globals.menu_depth == 1:
+        if globals.main_menu_entry == 2:
+            subprocess.check_output("sudo reboot", shell=True).decode("utf-8")
+        elif globals.main_menu_entry == 3:
+            subprocess.check_output("sudo shutdown now", shell=True).decode("utf-8")
+        elif globals.main_menu_entry == 4:
+            oled_display.draw_fan_speed(2)
+
 
 # menu functions
 #############################################################################
