@@ -8,19 +8,17 @@
 #############################################################################
 import time
 import oled_display
-import main
 import parameters
 import globals
-
 
 #############################################################################
 # GPIO Callbacks
 # Callback right button  
 def btn_right_callback(arg):
-    global globals.menu_depth
-    global globals.main_menu_entry
-    global globals.network_menu_entry
-    global globals.system_info_menu_entry
+    globals.menu_depth
+    globals.main_menu_entry
+    globals.network_menu_entry
+    globals.system_info_menu_entry
 
     # if in main menu go inside submenu
     if globals.menu_depth == 0:
@@ -29,47 +27,44 @@ def btn_right_callback(arg):
     elif globals.menu_depth == 1:
         globals.menu_depth-= 1
         oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback left button
 def btn_left_callback(arg):
-    global globals.menu_depth
-    global globals.main_menu_entry
+    globals.menu_depth
+    globals.main_menu_entry
     pass
     #if depth=0 do nothing
-    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback down button 
 def btn_down_callback(arg):
-    global globals.menu_depth
-    global globals.main_menu_entry
-    global globals.network_menu_entry
-    global globals.system_info_menu_entry
+    globals.menu_depth
+    globals.main_menu_entry
+    globals.network_menu_entry
+    globals.system_info_menu_entry
 
     # if in main manu scroll to next entry
     if globals.menu_depth == 0:
-        if globals.main_menu_entry < parameters.globals.main_menu_entry_CNT-1:
+        if globals.main_menu_entry < parameters.MAIN_MENU_ENTRY_CNT-1:
             globals.main_menu_entry+= 1
             oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
     elif globals.menu_depth ==1:
         #network submenu
         if globals.main_menu_entry == 0:
-            if globals.network_menu_entry < parameters.globals.network_menu_entry_CNT-1:
+            if globals.network_menu_entry < parameters.NETWORK_MENU_ENTRY_CNT-1:
                 globals.network_menu_entry+= 1
                 oled_display.draw_entry(parameters.DEPTH_1_NETWORK_LABELS[globals.network_menu_entry], parameters.NETWORK_ENTRY_FONT_SIZE)
         # system info submenu
         elif globals.main_menu_entry == 1:
-            if globals.system_info_menu_entry < parameters.globals.system_info_menu_entry_CNT-1:
+            if globals.system_info_menu_entry < parameters.SYSTEM_INFO_MENU_ENTRY_CNT-1:
                 globals.system_info_menu_entry+= 1
                 oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[globals.system_info_menu_entry], parameters.NETWORK_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
         
 # Callback up button
 def btn_up_callback(arg):
-    global globals.menu_depth
-    global globals.main_menu_entry
-    global globals.network_menu_entry
-    global globals.system_info_menu_entry
+    globals.menu_depth
+    globals.main_menu_entry
+    globals.network_menu_entry
+    globals.system_info_menu_entry
 
     # if in main menu scroll to previous menu
     if globals.menu_depth == 0:
@@ -87,14 +82,12 @@ def btn_up_callback(arg):
             if globals.system_info_menu_entry > 0:
                 globals.system_info_menu_entry-= 1
                 oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[globals.system_info_menu_entry], parameters.NETWORK_ENTRY_FONT_SIZE)
-    time.sleep(DEBOUNCING_TIME_S)
 
 # Callback center button
 def btn_center_callback(arg):
-    global globals.menu_depth
-    global globals.main_menu_entry
+    globals.menu_depth
+    globals.main_menu_entry
     pass
-    time.sleep(DEBOUNCING_TIME_S)
     
     # if in main menu go inside submenu
     if globals.menu_depth == 0:
@@ -104,7 +97,7 @@ def btn_center_callback(arg):
 # menu functions
 #############################################################################
 def update_submenu():
-    global globals.main_menu_entry
+    globals.main_menu_entry
     is_yes_state = False
     is_fan_mode_auto = False
 

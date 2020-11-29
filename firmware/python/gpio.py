@@ -11,6 +11,7 @@ import RPi.GPIO as GPIO
 import parameters
 import globals
 import handlers
+import subprocess
 
 # Init navigation button
 #############################################################################

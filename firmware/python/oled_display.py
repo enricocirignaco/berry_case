@@ -19,6 +19,7 @@ i2c	= 0
 display	= 0
 image = 0
 draw = 0
+font = ImageFont.truetype(parameters.FONT_PATH, parameters.MAIN_ENTRY_FONT_SIZE)
 
 # Init Oled Display
 #############################################################################
