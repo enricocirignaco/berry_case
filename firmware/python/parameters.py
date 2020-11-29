@@ -73,9 +73,10 @@ def update_dynamic_parameters():
         "Host:" + subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
     ]
     DEPTH_1_SYSTEM_INFO_LABELS = [
+        "Battery: 100%",
         "CPU Load: " + subprocess.check_output(BASH_COMMANDS["CPU"], shell=True).decode("utf-8"),
-        "CPU Temp: " + subprocess.check_output(BASH_COMMANDS["CPU_TEMP"], shell=True).decode("utf-8"),
-        "GPU Temp: " + subprocess.check_output(BASH_COMMANDS["GPU_TEMP"], shell=True).decode("utf-8"),
         "Memory: " + subprocess.check_output(BASH_COMMANDS["MEMORY"], shell=True).decode("utf-8"),
-        "Disk: " + subprocess.check_output(BASH_COMMANDS["DISK"], shell=True).decode("utf-8")
+        "Disk: " + subprocess.check_output(BASH_COMMANDS["DISK"], shell=True).decode("utf-8"),
+        "CPU Temp: " + subprocess.check_output(BASH_COMMANDS["CPU_TEMP"], shell=True).decode("utf-8"),
+        "GPU Temp: " + subprocess.check_output(BASH_COMMANDS["GPU_TEMP"], shell=True).decode("utf-8")   
     ]

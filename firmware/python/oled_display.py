@@ -91,11 +91,16 @@ def draw_charging_screen(charge):
     draw_empty()
 
     if charge == 100:
-        draw.text((parameters.RIGHT_PADDING,parameters.TOP_PADDING), "Fully Charged", font=font, fill=255)
+        draw.text((32,parameters.TOP_PADDING), "Charged", font=font, fill=255)
     else:
-        charge = "Charging..." + str(charge) + "%"
-        draw.text((parameters.RIGHT_PADDING,parameters.TOP_PADDING), charge, font=font, fill=255)
+        charge = str(charge)+"%"
+        draw.text((45,8), charge, font=font, fill=255)
     update_display()
+
+def draw_turn_off():
+    draw.rectangle((0, 0, parameters.DISPLAY_WIDTH, parameters.DISPLAY_HEIGHT), outline=0, fill=0)
+    update_display()
+
 
 
     

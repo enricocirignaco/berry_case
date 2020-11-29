@@ -30,4 +30,5 @@ try:
             handlers.update_submenu()
         time.sleep(1)
 except KeyboardInterrupt:
+    oled_display.draw_turn_off()
     gpio.GPIO.cleanup()
