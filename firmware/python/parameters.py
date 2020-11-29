@@ -24,7 +24,7 @@ DEPTH_0_LABELS = [
 DEPTH_1_NETWORK_LABELS =[
     "SSID:" + subprocess.check_output(BASH_COMMANDS["SSID"], shell=True).decode("utf-8"),
     subprocess.check_output(BASH_COMMANDS["IP"], shell=True).decode("utf-8"),
-    subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
+    "Host:" + subprocess.check_output(BASH_COMMANDS["HOSTNAME"], shell=True).decode("utf-8")
 ]
 DEPTH_1_SYSTEM_INFO_LABELS = [
     "CPU Load:",

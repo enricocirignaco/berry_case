@@ -26,6 +26,8 @@ def btn_right_callback(arg):
         update_submenu()
     elif globals.menu_depth == 1:
         globals.menu_depth-= 1
+        globals.network_menu_entry = 0
+        globals.system_info_menu_entry = 0
         oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
 
 # Callback left button
