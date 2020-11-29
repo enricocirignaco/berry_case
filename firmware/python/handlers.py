@@ -19,10 +19,7 @@ is_fan_mode_auto = False
 # GPIO Callbacks
 # Callback right button  
 def btn_right_callback(arg):
-    globals.menu_depth
-    globals.main_menu_entry
-    globals.network_menu_entry
-    globals.system_info_menu_entry
+    globals.display_counter = 0
     global is_yes_state
     global is_fan_mode_auto
 
@@ -46,8 +43,7 @@ def btn_right_callback(arg):
 def btn_left_callback(arg):
     global is_yes_state
     global is_fan_mode_auto
-    globals.menu_depth
-    globals.main_menu_entry
+    globals.display_counter = 0
     #if depth=0 do nothing
 
     if globals.menu_depth == 1:
@@ -61,10 +57,7 @@ def btn_left_callback(arg):
 
 # Callback down button 
 def btn_down_callback(arg):
-    globals.menu_depth
-    globals.main_menu_entry
-    globals.network_menu_entry
-    globals.system_info_menu_entry
+    globals.display_counter = 0
 
     # if in main manu scroll to next entry
     if globals.menu_depth == 0:
@@ -85,10 +78,7 @@ def btn_down_callback(arg):
         
 # Callback up button
 def btn_up_callback(arg):
-    globals.menu_depth
-    globals.main_menu_entry
-    globals.network_menu_entry
-    globals.system_info_menu_entry
+    globals.display_counter = 0
 
     # if in main menu scroll to previous menu
     if globals.menu_depth == 0:
@@ -109,8 +99,7 @@ def btn_up_callback(arg):
 
 # Callback center button
 def btn_center_callback(arg):
-    globals.menu_depth
-    globals.main_menu_entry
+    globals.display_counter = 0
     pass
     
     # if in main menu go inside submenu

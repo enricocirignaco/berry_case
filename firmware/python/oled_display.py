@@ -53,6 +53,7 @@ def init():
 def draw_empty():
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, parameters.DISPLAY_WIDTH-1, parameters.DISPLAY_HEIGHT-1), outline=255, fill=0)
+    globals.is_display_on = True
 
 def update_display():
     # Display image.
@@ -99,6 +100,11 @@ def draw_charging_screen(charge):
 
 def draw_turn_off():
     draw.rectangle((0, 0, parameters.DISPLAY_WIDTH, parameters.DISPLAY_HEIGHT), outline=0, fill=0)
+    globals.main_menu_entry = 0
+    globals.menu_depth = 0
+    globals.network_menu_entry = 0
+    globals.system_info_menu_entry = 0
+    globals.is_display_on = False
     update_display()
 
 

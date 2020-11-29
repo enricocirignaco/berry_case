@@ -29,6 +29,9 @@ try:
             parameters.update_dynamic_parameters()
             handlers.update_submenu()
         time.sleep(1)
+        globals.display_counter += 1
+        if globals.display_counter == parameters.DISPLAY_TIMEOUT:
+            oled_display.draw_turn_off()
 except KeyboardInterrupt:
     oled_display.draw_turn_off()
     gpio.GPIO.cleanup()

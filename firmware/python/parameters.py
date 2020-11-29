@@ -62,6 +62,7 @@ RIGHT_PADDING = 6
 DISPLAY_WIDTH = 128
 DISPLAY_HEIGHT = 32
 FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+DISPLAY_TIMEOUT = 10
 
 def update_dynamic_parameters():
     global DEPTH_1_NETWORK_LABELS
