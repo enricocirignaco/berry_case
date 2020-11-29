@@ -43,7 +43,7 @@ BTN_LEFT_GPIO = 4
 BTN_UP_GPIO = 17
 BTN_DOWN_GPIO = 22
 BTN_CENTER_GPIO = 23 #not working yet
-
+BOUNCETIME_MS = 200
 # oled display specific
 TOP_PADDING = 6
 RIGHT_PADDING = 6
