@@ -132,19 +132,10 @@ def update_submenu():
         oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[globals.system_info_menu_entry], parameters.SYSTEM_INFO_ENTRY_FONT_SIZE)
     # reboot submenu
     elif globals.main_menu_entry == 2 :
-        if is_yes_state:
-            oled_display.draw_confirm_yes()
-        else:
-            oled_display.draw_confirm_no()
+        oled_display.draw_selection("yes", "no", is_yes_state)
 
     elif globals.main_menu_entry == 3:
-        if is_yes_state:
-            oled_display.draw_confirm_yes()
-        else:
-            oled_display.draw_confirm_no()
+        oled_display.draw_selection("yes", "no", is_yes_state)
 
     elif globals.main_menu_entry == 4:
-        if is_fan_mode_auto:
-            oled_display.draw_fan_auto()
-        else:
-            oled_display.draw_fan_manual()
+        oled_display.draw_selection("auto", "man", is_fan_mode_auto)

@@ -65,21 +65,20 @@ def draw_entry(entry_name, font_size):
     draw.text((parameters.RIGHT_PADDING, parameters.TOP_PADDING), entry_name, font=font, fill=255)
     update_display()
 
-def draw_confirm_no():
+def draw_selection(left_selection, right_selection, is_left_selection):
+    # cast boolean to 0-255
+    left_selection_fill = int(is_left_selection)*255
+    right_selection_fill = int(not is_left_selection)*255
+
     draw_empty()
-    draw.rectangle((12,6,57,24), outline=255, fill=0)
-    draw.rectangle((69,6,114,24), outline=255, fill=255)
-    draw.text((17,6), "Yes", font=font, fill=255)
-    draw.text((77,6), "No", font=font, fill=0)
+    # draw boxes
+    draw.rectangle((12,6,57,24), outline=255, fill=left_selection_fill)
+    draw.rectangle((69,6,114,24), outline=255, fill=right_selection_fill)
+    # draw text inside boxes
+    draw.text((17,6), left_selection, font=font, fill=right_selection_fill)
+    draw.text((77,6), right_selection, font=font, fill=left_selection_fill)
     update_display()
 
-def draw_confirm_yes():
-    draw_empty()
-    draw.rectangle((12,6,57,24), outline=255, fill=255)
-    draw.rectangle((69,6,114,24), outline=255, fill=0)
-    draw.text((17,6), "Yes", font=font, fill=0)
-    draw.text((77,6), "No", font=font, fill=255)
-    update_display()
 
 def draw_fan_speed(speed):
     draw_empty()
@@ -87,18 +86,3 @@ def draw_fan_speed(speed):
         draw.rectangle((11+(11*i),6,17+(11*i),24), outline=255, fill=255)
     update_display()
 
-def draw_fan_auto():
-    draw_empty()
-    draw.rectangle((12,6,57,24), outline=255, fill=255)
-    draw.rectangle((69,6,114,24), outline=255, fill=0)
-    draw.text((15,6), "Auto", font=font, fill=0)
-    draw.text((73,6), "Man", font=font, fill=255)
-    update_display()
-
-def draw_fan_manual():
-    draw_empty()
-    draw.rectangle((12,6,57,24), outline=255, fill=0)
-    draw.rectangle((69,6,114,24), outline=255, fill=255)
-    draw.text((15,6), "Auto", font=font, fill=255)
-    draw.text((73,6), "Man", font=font, fill=0)
-    update_display()

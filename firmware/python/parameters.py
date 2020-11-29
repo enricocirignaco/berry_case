@@ -17,7 +17,9 @@ BASH_COMMANDS = {
     "CPU_TEMP": "cat /sys/class/thermal/thermal_zone0/temp | awk '{printf \"%.2f\", $1/1000}'",
     "GPU_TEMP": "/opt/vc/bin/vcgencmd measure_temp | cut -d '=' -d '=' -f2 | cut -d \\' -f1",
     "MEMORY": "free -m | awk 'NR==2{printf \"%.2f%%\", $3*100/$2 }'",
-    "DISK": 'df -h | awk \'$NF=="/"{printf "%d/%dGB  %s", $3,$2,$5}\''
+    "DISK": 'df -h | awk \'$NF=="/"{printf "%d/%dGB  %s", $3,$2,$5}\'',
+    "REBOOT": "sudo reboot",
+    "SHUTDOWN": "sudo shutdown now"
 
 }
 DEPTH_0_LABELS = [
