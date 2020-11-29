@@ -101,13 +101,13 @@ def btn_center_callback(arg):
 def update_submenu():
     is_yes_state = False
     is_fan_mode_auto = False
-
+    
     if globals.main_menu_entry == 0:
         #net
-        oled_display.draw_entry(parameters.DEPTH_1_NETWORK_LABELS[0], parameters.NETWORK_ENTRY_FONT_SIZE)
+        oled_display.draw_entry(parameters.DEPTH_1_NETWORK_LABELS[globals.network_menu_entry], parameters.NETWORK_ENTRY_FONT_SIZE)
     elif globals.main_menu_entry == 1:
         #system info
-        oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[0], parameters.SYSTEM_INFO_ENTRY_FONT_SIZE)
+        oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[globals.system_info_menu_entry], parameters.SYSTEM_INFO_ENTRY_FONT_SIZE)
     # reboot submenu
     elif globals.main_menu_entry == 2 :
         if is_yes_state:
