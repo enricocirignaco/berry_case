@@ -99,7 +99,6 @@ def btn_center_callback(arg):
 # menu functions
 #############################################################################
 def update_submenu():
-    globals.main_menu_entry
     is_yes_state = False
     is_fan_mode_auto = False
 
@@ -108,7 +107,7 @@ def update_submenu():
         oled_display.draw_entry(parameters.DEPTH_1_NETWORK_LABELS[0], parameters.NETWORK_ENTRY_FONT_SIZE)
     elif globals.main_menu_entry == 1:
         #system info
-        oled_display.draw_entry("CPU temp", 10)
+        oled_display.draw_entry(parameters.DEPTH_1_SYSTEM_INFO_LABELS[0], parameters.SYSTEM_INFO_ENTRY_FONT_SIZE)
     # reboot submenu
     elif globals.main_menu_entry == 2 :
         if is_yes_state:
