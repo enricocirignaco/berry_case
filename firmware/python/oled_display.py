@@ -10,17 +10,11 @@ from board import SCL, SDA
 import busio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
-
-# Define constants
-#############################################################################
-TOP_PADDING = 6
-RIGHT_PADDING = 6
-DISPLAY_WIDTH = 128
-DISPLAY_HEIGHT = 32
-FONT_PATH = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+import parameters
+import globals
 
 #############################################################################
-# Define variables
+# Define private variables
 i2c	= 0
 display	= 0
 image = 0
@@ -38,13 +32,13 @@ def init():
     # Create the SSD1306 OLED class.
     # The first two parameters are the pixel width and pixel height.  Change these
     # to the right size for your display!
-    display = adafruit_ssd1306.SSD1306_I2C(DISPLAY_WIDTH, DISPLAY_HEIGHT, i2c)
+    display = adafruit_ssd1306.SSD1306_I2C(parameters.DISPLAY_WIDTH, parameters.DISPLAY_HEIGHT, i2c)
     # Clear display.
     display.fill(0)
     display.show()
     # Create blank image for drawing.
     # Make sure to create image with mode '1' for 1-bit color.
-    image = Image.new("1", (DISPLAY_WIDTH, DISPLAY_HEIGHT))
+    image = Image.new("1", (parameters.DISPLAY_WIDTH, parameters.DISPLAY_HEIGHT))
     # Get drawing object to draw on image.
     draw = ImageDraw.Draw(image)
     # Load default font.
@@ -57,7 +51,7 @@ def init():
 #############################################################################
 def draw_empty():
     # Draw a black filled box to clear the image.
-    draw.rectangle((0, 0, DISPLAY_WIDTH-1, DISPLAY_HEIGHT-1), outline=255, fill=0)
+    draw.rectangle((0, 0, parameters.DISPLAY_WIDTH-1, parameters.DISPLAY_HEIGHT-1), outline=255, fill=0)
 
 def update_display():
     # Display image.
@@ -65,9 +59,9 @@ def update_display():
     display.show()
 
 def draw_entry(entry_name, font_size):
-    font = ImageFont.truetype(FONT_PATH, font_size)
+    font = ImageFont.truetype(parameters.FONT_PATH, font_size)
     draw_empty()
-    draw.text((RIGHT_PADDING, TOP_PADDING), entry_name, font=font, fill=255)
+    draw.text((parameters.RIGHT_PADDING, parameters.TOP_PADDING), entry_name, font=font, fill=255)
     update_display()
 
 def draw_confirm_no():
