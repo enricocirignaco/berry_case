@@ -40,8 +40,8 @@ NETWORK_ENTRY_FONT_SIZE = 12
 # gpio specific
 BTN_RIGHT_GPIO = 27
 BTN_LEFT_GPIO = 4
-BTN_UP_GPIO = 22
-BTN_DOWN_GPIO = 17
+BTN_UP_GPIO = 17
+BTN_DOWN_GPIO = 22
 BTN_CENTER_GPIO = 23 #not working yet
 
 # oled display specific

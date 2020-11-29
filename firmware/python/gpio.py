@@ -18,22 +18,22 @@ import subprocess
 def init():
     GPIO.setmode(GPIO.BCM)
     # Setup GPIOs as input with pullup resistor
-    GPIO.setup(parameters.BTN_RIGHT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(parameters.BTN_LEFT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(parameters.BTN_DOWN_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(parameters.BTN_RIGHT_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(parameters.BTN_UP_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(parameters.BTN_DOWN_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(parameters.BTN_CENTER_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     # Create callback event for every GPIOs on falling edge
-    GPIO.add_event_detect(parameters.BTN_RIGHT_GPIO, GPIO.FALLING)
     GPIO.add_event_detect(parameters.BTN_LEFT_GPIO, GPIO.FALLING)
-    GPIO.add_event_detect(parameters.BTN_DOWN_GPIO, GPIO.FALLING)
+    GPIO.add_event_detect(parameters.BTN_RIGHT_GPIO, GPIO.FALLING)
     GPIO.add_event_detect(parameters.BTN_UP_GPIO, GPIO.FALLING)
+    GPIO.add_event_detect(parameters.BTN_DOWN_GPIO, GPIO.FALLING)
     GPIO.add_event_detect(parameters.BTN_CENTER_GPIO, GPIO.FALLING)
     # Define callback functions to be called
-    GPIO.add_event_callback(parameters.BTN_DOWN_GPIO, handlers.btn_down_callback)
-    GPIO.add_event_callback(parameters.BTN_UP_GPIO, handlers.btn_up_callback)
-    GPIO.add_event_callback(parameters.BTN_RIGHT_GPIO, handlers.btn_right_callback)
     GPIO.add_event_callback(parameters.BTN_LEFT_GPIO, handlers.btn_left_callback)
+    GPIO.add_event_callback(parameters.BTN_RIGHT_GPIO, handlers.btn_right_callback)
+    GPIO.add_event_callback(parameters.BTN_UP_GPIO, handlers.btn_up_callback)
+    GPIO.add_event_callback(parameters.BTN_DOWN_GPIO, handlers.btn_down_callback)
     GPIO.add_event_callback(parameters.BTN_CENTER_GPIO, handlers.btn_center_callback)
 
 
