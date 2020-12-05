@@ -11,6 +11,7 @@ import oled_display
 import parameters
 import globals
 import subprocess
+import fan
 
 is_yes_state = False
 is_fan_mode_auto = False
@@ -27,6 +28,10 @@ def btn_right_callback(arg):
         is_yes_state = False
         is_fan_mode_auto = False
         update_submenu()
+    elif globals.menu_depth == 2 and globals.main_menu_entry == 4:
+        if(globals.fan_speed_man < 10):
+            globals.fan_speed_man+= 1
+            fan.run_fan_man(globals.fan_speed_man)
 
 
 # Callback left button
@@ -44,6 +49,10 @@ def btn_left_callback(arg):
             is_yes_state = True
             is_fan_mode_auto = True
             update_submenu()
+    elif globals.menu_depth == 2 and globals.main_menu_entry == 4:
+        if(globals.fan_speed_man > 0):
+            globals.fan_speed_man-= 1
+            fan.run_fan_man(globals.fan_speed_man)
 
 # Callback down button 
 def btn_down_callback(arg):
@@ -93,10 +102,12 @@ def btn_center_callback(arg):
     global is_yes_state
     global is_fan_mode_auto
 
+    # submenu depth 0
     # if in main menu go inside submenu
     if globals.menu_depth == 0:
         globals.menu_depth+= 1
         update_submenu()
+    # submenu depth 1
     elif globals.menu_depth == 1:
         if globals.main_menu_entry == 0 or globals.main_menu_entry == 1:
             globals.menu_depth-= 1
@@ -106,20 +117,37 @@ def btn_center_callback(arg):
         else:
             if(is_yes_state == True and globals.main_menu_entry == 2):
                 #reboot
-                pass
+                oled_display.draw_turn_off()
+                subprocess.run("reboot", shell=True)
+                exit()
             elif(is_yes_state == True and globals.main_menu_entry == 3):
                 #shutdown
-                pass
+                oled_display.draw_turn_off()
+                print("shutdown")
+                subprocess.run("systemctl poweroff -i", shell=True)
+                exit()
             elif(globals.main_menu_entry == 4):
                 if(is_fan_mode_auto == True):
                     #set auto and escape submenu
-                    pass
+                    globals.is_fan_auto_enabled = True
+                    globals.menu_depth-= 1
+                    oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+
                 else:
                     #enter fan speed menu
-                    pass
+                    globals.is_fan_auto_enabled = False
+                    fan.run_fan_man(globals.fan_speed_man)
+                    globals.menu_depth+= 1
             else:
                 globals.menu_depth-= 1
                 oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+
+    # submenu depth 2
+    elif(globals.menu_depth == 2):
+        if(globals.main_menu_entry == 4):
+            globals.menu_depth = 0
+            oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+
 
 
 
