@@ -24,6 +24,11 @@ def btn_right_callback(arg):
     global is_yes_state
     global is_fan_mode_auto
 
+    # Check if Display was off, then turn it on and to nothing else
+    if(globals.is_display_on == False):
+        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        return
+
     if globals.menu_depth == 1 and globals.main_menu_entry > 1:
         is_yes_state = False
         is_fan_mode_auto = False
@@ -41,6 +46,11 @@ def btn_left_callback(arg):
     globals.display_counter = 0
     #if depth=0 do nothing
 
+    # Check if Display was off, then turn it on and to nothing else
+    if(globals.is_display_on == False):
+        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        return
+
     if globals.menu_depth == 1:
         if globals.main_menu_entry == 0 or globals.main_menu_entry == 1:
             #if network or system submenu do nothing
@@ -57,6 +67,11 @@ def btn_left_callback(arg):
 # Callback down button 
 def btn_down_callback(arg):
     globals.display_counter = 0
+
+    # Check if Display was off, then turn it on and to nothing else
+    if(globals.is_display_on == False):
+        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        return
 
     # if in main manu scroll to next entry
     if globals.menu_depth == 0:
@@ -79,6 +94,11 @@ def btn_down_callback(arg):
 def btn_up_callback(arg):
     globals.display_counter = 0
 
+    # Check if Display was off, then turn it on and to nothing else
+    if(globals.is_display_on == False):
+        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        return
+    
     # if in main menu scroll to previous menu
     if globals.menu_depth == 0:
         if globals.main_menu_entry > 0:
@@ -101,6 +121,11 @@ def btn_center_callback(arg):
     globals.display_counter = 0
     global is_yes_state
     global is_fan_mode_auto
+
+    # Check if Display was off, then turn it on and to nothing else
+    if(globals.is_display_on == False):
+        oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
+        return
 
     # submenu depth 0
     # if in main menu go inside submenu
@@ -151,7 +176,7 @@ def btn_center_callback(arg):
 
 
 
-# menu functions
+# other functions
 #############################################################################
 def update_submenu():
     global is_yes_state
