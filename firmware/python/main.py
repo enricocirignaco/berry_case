@@ -19,6 +19,7 @@ import handlers
 gpio.init()
 oled_display.init()
 oled_display.draw_entry(parameters.DEPTH_0_LABELS[0], parameters.MAIN_ENTRY_FONT_SIZE)
+parameters.update_dynamic_parameters()
 
 # Endless Loop
 #############################################################################
