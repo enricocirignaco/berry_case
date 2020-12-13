@@ -151,13 +151,16 @@ def btn_center_callback(arg):
         else:
             if(is_yes_state == True and globals.main_menu_entry == 2):
                 #reboot
+                oled_display.draw_entry("Shutting Down...", parameters.SHUTDOWN_FONT_SIZE)
+                time.sleep(2)
                 oled_display.draw_turn_off()
                 subprocess.run("reboot", shell=True)
                 exit()
             elif(is_yes_state == True and globals.main_menu_entry == 3):
                 #shutdown
+                oled_display.draw_entry("Shutting Down...", parameters.SHUTDOWN_FONT_SIZE)
+                time.sleep(2)
                 oled_display.draw_turn_off()
-                print("shutdown")
                 subprocess.run("systemctl poweroff -i", shell=True)
                 exit()
             elif(globals.main_menu_entry == 4):
