@@ -28,8 +28,14 @@ def btn_right_callback(arg):
     if(globals.is_display_on == False):
         oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
         return
+    
+    # submenu depth 0
+    # if in main menu go inside submenu
+    if globals.menu_depth == 0:
+        globals.menu_depth+= 1
+        update_submenu()
 
-    if globals.menu_depth == 1 and globals.main_menu_entry > 1:
+    elif globals.menu_depth == 1 and globals.main_menu_entry > 1:
         is_yes_state = False
         is_fan_mode_auto = False
         update_submenu()
@@ -52,9 +58,12 @@ def btn_left_callback(arg):
         return
 
     if globals.menu_depth == 1:
+        #if depth=0 and Main entry is network or system, go back.
         if globals.main_menu_entry == 0 or globals.main_menu_entry == 1:
-            #if network or system submenu do nothing
-            pass
+            globals.menu_depth-= 1
+            globals.network_menu_entry = 0
+            globals.system_info_menu_entry = 0
+            oled_display.draw_entry(parameters.DEPTH_0_LABELS[globals.main_menu_entry], parameters.MAIN_ENTRY_FONT_SIZE)
         else:
             is_yes_state = True
             is_fan_mode_auto = True
