@@ -128,6 +128,8 @@ By pressing a push button a capacitor is charged and the 5V2 Regulator is activa
 ### OLED Display
 https://www.mcielectronics.cl/website_MCI/static/documents/0.91inch_OLED_Module_User_Manual_EN.pdf
 https://controllerstech.com/oled-display-using-i2c-stm32/
+### auto power off
+http://crsengineering.altervista.org/eng/pi/pi_GPIO_poweroff_eng.html
 ### Software (Linux)
 #### Prerequisites
 #### Installation
