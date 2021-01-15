@@ -124,7 +124,15 @@ By pressing a push button a capacitor is charged and the 5V2 Regulator is activa
 
 <img src="./ressources/diagrams/diagram_v0.1b.svg" alt="diagram">
 
-### Firmware
+## Firmware
+### OLED Display
+https://www.mcielectronics.cl/website_MCI/static/documents/0.91inch_OLED_Module_User_Manual_EN.pdf
+https://controllerstech.com/oled-display-using-i2c-stm32/
+https://github.com/adafruit/Adafruit_CircuitPython_SSD1306
+### auto power off
+http://crsengineering.altervista.org/eng/pi/pi_GPIO_poweroff_eng.html
+### network tool
+https://www.raspberryconnect.com/projects/65-raspberrypi-hotspot-accesspoints/183-raspberry-pi-automatic-hotspot-and-static-hotspot-installer
 ### Software (Linux)
 #### Prerequisites
 #### Installation
