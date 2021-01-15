@@ -38,16 +38,18 @@
 * [About the Project](#about-the-project)
   * [Starting Situation](#starting-situation)
   * [Aim](#aim)
-  * [Product Requirements](#product-requirements)
-  * [Current Status](#curent-status)
-* [Getting Started](#getting-started)
-  * [Toolchain](#Toolchain)
-  * [Hardware](#hardware)
-  * [Firmware](#firmware)
-  * [Sofware(Linux)](#software)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-* [Usage](#usage)
+  * [Product Requirements](#product-reqirements)
+  * [Current Status](#current-status-(15.01.2021))
+* [Hardware](#hardware)
+  * [Schematics](#schematics)
+    * [Main](#main)
+    * [Power Supply](#power-supply)
+* [Sofware](#software)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Usage](#usage)
+* [Mechannic](#mechanic)
+* [Sources](#sources)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -56,6 +58,7 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 An affordable and open source case for the Raspberry Pi 4 to help the users became more productive and portable then ever.
+
 <img src="./ressources/images/v1.2_side.png" alt="top_view">
 
 ## Starting Situation
@@ -82,7 +85,7 @@ Find someone on github to collaborate with.
 * PSU: UPS, BMS and 5.2V@min 2A output supply.
 * Accessible GPIOs
 
-## Current Status (15.01.2020)
+## Current Status (15.01.2021)
 Version 1.2 of the PCB is done. Software still in alpha phase. At the moment I'm focused on the Enclosure. I'm testing different 3D printed cases for the RPi4.
 
 # Hardware
