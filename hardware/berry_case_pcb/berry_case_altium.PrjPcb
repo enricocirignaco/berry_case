@@ -177,6 +177,62 @@ DocumentUniqueId=
 DocumentPath=Project Outputs for berry_case_altium\Design Rule Check - pcb.html
 DItemRevisionGUID=
 
+[GeneratedDocument2]
+DocumentPath=Project Outputs for berry_case_altium\NC Drill\pcb-RoundHoles.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for berry_case_altium\NC Drill\pcb-SlotHoles.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for berry_case_altium\NC Drill\pcb.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for berry_case_altium\Gerber\pcb.RUL
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
