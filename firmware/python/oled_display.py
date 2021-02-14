@@ -106,9 +106,3 @@ def draw_turn_off():
     globals.system_info_menu_entry = 0
     globals.is_display_on = False
     update_display()
-
-
-
-    
-    
-
