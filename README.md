@@ -59,7 +59,7 @@
 # About The Project
 An affordable and open source case for the Raspberry Pi 4 to help the users became more productive and portable then ever.
 
-<img src="./ressources/images/v1.2_side.png" alt="top_view">
+<img src="./ressources/images/v1.3_side.png" alt="top_view">
 
 ## Starting Situation
 
@@ -92,12 +92,12 @@ Version 1.2 of the PCB is done. Software still in alpha phase. At the moment I'm
 The PCB is developed with [Altium Designer](https://altium.com).
 ## Schematics
 ### Main
-<a href="https://github.com/enricocirignaco/berry_case/blob/feature/readme/ressources/schematics/main.pdf">
+<a href="https://github.com/enricocirignaco/berry_case/blob/master/ressources/schematics/main.pdf">
   <img src="./ressources/images/schematics_main.jpg" alt="diagram">
 </a>
 
 ### Power Supply
-<a href="https://github.com/enricocirignaco/berry_case/blob/feature/readme/ressources/schematics/power_supply.pdf">
+<a href="https://github.com/enricocirignaco/berry_case/blob/master/ressources/schematics/power_supply.pdf">
   <img src="./ressources/images/schematics_power_supply.jpg" alt="diagram">
 </a>
 
